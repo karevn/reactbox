@@ -1,0 +1,23 @@
+{
+  "name": "reactbox",
+  "description": "Powerful React.js-based lightbox",
+  "version": "0.1.0",
+  "author": "Nikolay Karev",
+  "url": "http://reactbox.karevn.com",
+  "main": "index.coffee",
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "scripts": {},
+  "devDependencies": {},
+  "dependencies": {
+    "classnames": "^2.2.3",
+    "deepmerge": "^0.2.10",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-scrollbar": "file:///Users/karevn/src/reactScrollbar",
+    "yaux": "^0.1.0"
+  }
+}

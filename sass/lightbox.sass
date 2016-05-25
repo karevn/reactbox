@@ -1,0 +1,92 @@
+@import ./mixins.sass
+@import ./font.sass
+.reactbox-lightbox
+  position: absolute
+  z-index: 100002
+  left: 0px
+  right: 0px
+  bottom: 0px
+  top: 0px
+  .reactbox-lightbox-content
+    width: 100%
+    height: 100%
+    position: absolute
+    left: 0
+    top: 0
+.reactbox-next, .reactbox-prev
+  position: fixed
+  color: white
+  font-size: 54px
+  cursor: pointer
+  z-index: 5
+  +hover-active
+  background: transparent
+  user-select: none
+  &.reactbox-disabled
+    opacity: 0.15
+    cursor: default
+    &:hover
+      opacity: 0.15
+  &:active, &:focus
+    outline: none
+    background: transparent
+  i
+    position: absolute
+    display: block
+
+
+
+.reactbox-next, .reactbox-prev
+  top: 54px
+  bottom: 0px
+  width: 60px
+  i
+    text-align: center
+    display: inline-block
+    width: 100%
+    +reactbox-icon
+    margin: -72px 0 0 0
+    padding: 15px 0
+    top: 50%
+    &:before
+      margin: 0
+.reactbox-has-carousel
+  .reactbox-next, .reactbox-prev
+    bottom: 130px
+    i
+      margin-top: -28px
+.reactbox-prev
+  left: 0
+  width: 54px
+  i
+    border-radius: 0 4px 4px 0
+    &:before
+      content: '\e800'
+      transform: rotate(180deg)
+      transform-origin: 50% 50%
+.reactbox-next
+  right: 0
+  i
+    border-radius: 4px 0 0 4px
+    &:before
+      content: '\e800'
+      transform-origin: 50% 50%
+@media screen and (orientation: portrait)
+  .reactbox
+    .reactbox-next, .reactbox-prev
+      font-size: 20px
+      height: 42px
+      width: 30px
+      bottom: auto
+      line-height: 42px
+      i
+        margin: none
+        position: static
+        padding: 0
+        display: inline
+    .reactbox-prev
+      left: 12px
+      top: 3px
+    .reactbox-next
+      left: 36px
+      top: 3px

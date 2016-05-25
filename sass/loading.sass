@@ -1,0 +1,20 @@
+.reactbox-loading
+	display: block
+	position: absolute
+	top: 50%
+	left: 50%
+	color: white
+	height: 72px
+	width: 72x
+	margin-top: -36px
+	margin-left: -36px
+	clip-path: circle(36px at 36px 36px)
+	transition: transform 0.5s
+	&:before
+		animation: reactbox-spin 2s infinite linear
+		font-size: 48px
+		transform:  matrix(-1, 0, 0, 1, 0, 0)
+		position: absolute
+		top: 6px
+		left: 6px
+		margin: 0

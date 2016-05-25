@@ -1,0 +1,46 @@
+@import ./mixins.sass
+.reactbox-carousel
+  position: fixed
+  z-index: 100003
+  left: 0
+  bottom: 0
+  overflow: hidden
+  display: none
+  bottom: 0
+  left: 0
+  right: 0
+  margin: 15px 0
+  height: 100px
+  +respond-to(wide-screens)
+    display: block
+  .reactbox-carousel-item
+    opacity: 0
+    position: absolute
+    transition: opacity 0.3s
+    cursor: pointer
+    background: black
+    height: 100px
+    &.reactbox-loaded
+      opacity: 1
+    &.reactbox-animated
+      transition: all 0.3s
+    img
+      display: block
+      height: 100%
+      opacity: 0.5
+      transition: opacity 0.3s
+      border-radius: 2px
+    &:hover img
+      opacity: 1
+    &.reactbox-active
+      cursor: default
+      img
+        opacity: 1
+    &.reactbox-error
+      width: 100px
+      background: #333
+      text-align: center
+      line-height: 100px
+      i
+        display: block
+        font-size: 70px

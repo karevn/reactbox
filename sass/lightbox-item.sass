@@ -1,0 +1,166 @@
+@import ./mixins.sass
+@import ./font.sass
+
+.reactbox-lightbox-item
+  position: absolute
+  z-index: 1
+  left: 0px
+  top: 54px
+  transition: transform 0.3s
+  &.reactbox-active
+    z-index: 2
+  .reactbox-lightbox-item-content
+    position: absolute
+    top: 54px
+    left: 72px
+    right: 72px
+    bottom: 36px
+    transition: opacity 0.3s
+    opacity: 0
+  &.reactbox-loaded .reactbox-lightbox-item-content
+    opacity: 1
+
+  @media screen and (max-width: 768px)
+    .reactbox-lightbox-item-content
+      left: 24px
+      right: 24px
+      bottom: 24px
+  &.reactbox-description-none
+    .reactbox-lightbox-item-object
+      position: absolute
+      bottom: 0px
+      top: 0
+      left: 0
+      right: 0
+  &.reactbox-description-mini
+    .reactbox-lightbox-item-object
+      position: absolute
+      bottom: 50px
+      top: 0
+      left: 0
+      right: 0
+    .reactbox-lightbox-item-content
+      bottom: 24px
+  &.reactbox-description-bottom
+    width: 100%
+    height: 100%
+    .reactbox-lightbox-item-content
+      width: 85%
+      max-width: 860px
+      margin: 0 auto
+    @media screen and (max-width: 767px)
+      .reactbox-lightbox-item-content
+        left: 6px
+        right: 6px
+        max-width: none
+        width: auto
+  &.reactbox-description-right
+    .reactbox-lightbox-item-content
+      display: flex
+    .reactbox-lightbox-item-object
+      flex: 1
+    .reactbox-lightbox-item-description
+      flex: 1
+.reactbox-lightbox-item
+  &.reactbox-no-description
+    .reactbox-lightbox-item-content-wrapper
+      position: absolute
+      left: 0
+      right: 0
+      top: 0
+      bottom: 0
+      transform: none
+    .reactbox-item-object
+      position: absolute
+      bottom: 0
+      top: 0
+      left: 0
+      right: 0
+
+
+  &.reactbox-description-mini
+    .reactbox-lightbox-item-content-wrapper
+      position: absolute
+      left: 0
+      right: 0
+      top: 0
+      bottom: 0
+      transform: none
+
+  &.reactbox-description-right
+    +respond-to(wide-screens)
+      .reactbox-lightbox-item-content-wrapper
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        width: 80%
+        height: 100%
+        max-width: 1200px
+      .reactbox-item-object
+          position: static
+          float: none
+          margin-right: 55%
+    @media screen and (max-width: 1024px)
+      overflow: scroll
+      .reactbox-lightbox-item-content-wrapper
+        max-height: 100%
+
+  &.reactbox-description-bottom
+    overflow: scroll
+    .reactbox-lightbox-item-content-wrapper
+      max-height: 100%
+    .reactbox-item-description, .reactbox-item-object
+      width: 650px
+      margin: 0 auto
+      max-width: 100%
+    +respond-to(handhelds-portrait)
+      width: 100%
+      bottom: 0
+      .reactbox-item-description, .reactbox-item-object, .reactbox-lightbox-item-content-wrapper
+        width: 100%
+    .reactbox-item-object
+      overflow: hidden
+      margin: 0 auto
+
+  &.reactbox-description-right, &.reactbox-description-bottom
+    +respond-to(handhelds-portrait)
+      position: fixed
+      top: 42px
+      left: 6px
+      right: 6px
+      bottom: 6px
+      width: auto
+      overflow: scroll
+      .reactbox-item-object
+        .reactbox-image-content img
+          display: block
+          width: 100%
+
+
+
+.reactbox-has-carousel .reactbox-lightbox-item-content,
+.reactbox-has-carousel .reactbox-description-mini .reactbox-lightbox-item-content
+  bottom: 24px
+  bottom: 130px
+.reactbox-has-carousel .reactbox-description-bottom
+  position: fixed
+  overflow: scroll
+.reactbox-description-bottom .reactbox-lightbox-item-content
+  padding-bottom: 36px
+  position: relative
+  right: auto
+  left: auto
+  bottom: auto
+.reactbox-has-carousel .reactbox-description-bottom .reactbox-lightbox-item-content
+  padding: 0px 0 130px 0
+.reactbox-lightbox-item
+  +respond-to(wide-screens)
+    left: 0
+    right: 0
+    bottom: 45px
+    top: 45px
+.reactbox-has-carousel
+  +respond-to(wide-screens)
+    .reactbox-lightbox-item
+      bottom: 130px
