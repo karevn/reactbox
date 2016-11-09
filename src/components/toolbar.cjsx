@@ -20,12 +20,12 @@ module.exports = React.createClass
     <div className="reactbox-toolbar-wrapper">
       <div className="reactbox-toolbar">
         <div className="reactbox-toolbar-actions">
-          <a href="#" onClick={-> prop.dispatch('unmount'); false}
+          <a href="#" onClick={(e)-> e.preventDefault(); prop.dispatch('unmount');}
             className="reactbox-toolbar-close reactbox-toolbar-link">
             <i className="reactbox-icon-close" />
           </a>
           { if hasFullscreen and !prop.toolbar.isFullscreen
-            <a href="#" onClick={-> prop.dispatch('fullscreen.enter'); false}
+            <a href="#" onClick={(e)-> e.preventDefault(); prop.dispatch('fullscreen.enter');}
               className="reactbox-toolbar-fullscreen reactbox-toolbar-link">
               <i className="reactbox-icon-fullscreen" />
               <span className="reactbox-tooltip">
@@ -36,7 +36,7 @@ module.exports = React.createClass
           { if hasFullscreen and prop.toolbar.isFullscreen
             <a href="#"
               className="reactbox-toolbar-link reactbox-toolbar-exit-fullscreen"
-              onClick={-> prop.dispatch('fullscreen.exit'); false}>
+              onClick={(e)-> e.preventDefault(); prop.dispatch('fullscreen.exit');}>
               <i className="reactbox-icon-exit-fullscreen" />
               <span className="reactbox-tooltip">
                 {prop.i18n.toolbar.fullscreen.exit}
