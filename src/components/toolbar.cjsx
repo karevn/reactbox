@@ -20,7 +20,7 @@ module.exports = React.createClass
     <div className="reactbox-toolbar-wrapper">
       <div className="reactbox-toolbar">
         <div className="reactbox-toolbar-actions">
-          <a href="#" onClick={-> prop.dispatch('unmount')}
+          <a href="#" onClick={-> prop.dispatch('unmount'); false}
             className="reactbox-toolbar-close reactbox-toolbar-link">
             <i className="reactbox-icon-close" />
           </a>

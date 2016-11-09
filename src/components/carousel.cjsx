@@ -91,7 +91,7 @@ Carousel = React.createClass
         item.left > window.innerWidth * 1.5
           break
     left = @getLeftForActive()
-    if current.index > 0
+    if current.index > 0  && (current.thumbnailLoaded || current.thumbnailError)
       for i in [current.index - 1 .. 0]
         item = @props.items[i]
         left = left - (width = @getWidth(@props.items[i])) - 12

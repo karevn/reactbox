@@ -1,7 +1,7 @@
 hash = null
 module.exports =
   init: ()->
-    hash = location.hash
+    hash = location.hash if location.hash
   set: (item)->
     try
       if item.hash
@@ -10,5 +10,8 @@ module.exports =
         location.hash = if hash then hash else ''
   reset: ->
     try
-      location.hash = hash if hash
+      if hash
+        location.hash = hash
+      else
+        location.hash = ''
     hash = null

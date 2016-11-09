@@ -2,7 +2,7 @@ require('../../../../sass/content/image.sass')
 React = require('react')
 ReactDOM = require('react-dom')
 classnames = require('classnames')
-Options = require('../../../options')
+getStyle = require '../style.coffee'
 module.exports = React.createClass
   getInitialState: -> {width: 0, height: 0}
   componentDidMount: ->
@@ -38,7 +38,7 @@ module.exports = React.createClass
   getImageStyle: ->
     return unless @props.item.size
     return unless @state.height > 0
-    if Options.getDescriptionStyle(@props.item) in ['none', 'mini']
+    if getStyle(@props.item) in ['none', 'mini']
       return @getStyleFit()
     return @getStyleFill()
 

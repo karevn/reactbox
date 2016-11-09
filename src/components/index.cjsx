@@ -3,7 +3,7 @@ React = require('react')
 ReactDOM = require('react-dom')
 
 Toolbar = require('./toolbar.cjsx')
-Lightbox = require('./lightbox')
+Lightbox = require('./lightbox').default
 Carousel = require('./carousel.cjsx')
 classnames = require('classnames')
 options = require('../options')
