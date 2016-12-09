@@ -35,7 +35,7 @@ module.exports = React.createClass
       return style
     {
       height: @state.size.height
-      width: width = @state.size.height * imageAspect
+      width: @state.size.height * imageAspect
       left: (@state.size.width - width) / 2
     }
 
