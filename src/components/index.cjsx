@@ -2,9 +2,9 @@ require('../../sass/reactbox.sass')
 React = require('react')
 ReactDOM = require('react-dom')
 
-Toolbar = require('./toolbar.cjsx')
+Toolbar = require('./toolbar')
 Lightbox = require('./lightbox').default
-Carousel = require('./carousel.cjsx')
+Carousel = require('./carousel')
 classnames = require('classnames')
 options = require('../options')
 dispatch = require('yaux')
