@@ -6,22 +6,23 @@ Toolbar = require('./toolbar')
 Lightbox = require('./lightbox').default
 Carousel = require('./carousel')
 classnames = require('classnames')
-options = require('../options')
+options = require('../options').default
+getCarouselOptions = require('../options').getCarousel
 dispatch = require('yaux')
 store = require('../store')
 deeplink = require('../deeplink')
 fullscreen = require('../fullscreen')
+
 ReactBox = React.createClass
   getInitialState: -> width: window.innerWidth
   componentDidMount: ->
     window.addEventListener 'resize', @onWindowResize
   componentWillUnmount: ->
     window.removeEventListener 'resize', @onWindowResize
-
   onWindowResize: ->
     @setState width: window.innerWidth
   render: (prop = @props)->
-    carousel = options.getCarousel(prop)
+    carousel = getCarouselOptions(prop)
     <div className={classnames ['reactbox'],
       'reactbox-horizontal': true
       'reactbox-has-carousel': carousel
