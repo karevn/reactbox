@@ -1,5 +1,6 @@
-fullscreen = require('./fullscreen')
-deeplink = require('./deeplink')
+fullscreen = require('./fullscreen').default
+deeplink = require('./deeplink').default
+
 module.exports =
   'share.open': (state)->
     state.toolbar.shareActive = true
