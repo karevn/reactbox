@@ -1,7 +1,7 @@
 require('../../../sass/lightbox-item.sass')
 React = require('react')
 ReactDOM = require('react-dom')
-Loading = require('../loading')
+Loading = require('../loading').default
 Description = require('./description')
 content = require('./content')
 classnames = require('classnames')
