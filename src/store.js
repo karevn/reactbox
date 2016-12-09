@@ -1,5 +1,6 @@
 import fullscreen from './fullscreen';
 import deeplink from './deeplink';
+
 export default {
   ['share.open'](state){
     return state.toolbar.shareActive = true;

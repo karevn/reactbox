@@ -8,10 +8,6 @@ Carousel = require('./carousel')
 classnames = require('classnames')
 options = require('../options').default
 getCarouselOptions = require('../options').getCarousel
-dispatch = require('yaux')
-store = require('../store').default
-deeplink = require('../deeplink').default
-fullscreen = require('../fullscreen')
 
 module.exports = React.createClass
   getInitialState: -> width: window.innerWidth

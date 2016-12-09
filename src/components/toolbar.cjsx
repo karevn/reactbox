@@ -1,6 +1,6 @@
 require('../../sass/toolbar.sass')
-fullscreen = require('../fullscreen')
-share = require('../share')
+fullscreen = require('../fullscreen').default
+share = require('../share').default
 hasFullscreen = fullscreen.supports()
 React = require('react')
 module.exports = React.createClass
