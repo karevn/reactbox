@@ -2,6 +2,7 @@ require('../../../../sass/content/ajax.sass')
 React = require('react')
 classnames = require('classnames')
 ajax = require 'atomicjs'
+
 module.exports = React.createClass
   getInitialState: -> {html: ''}
   componentDidMount: ->

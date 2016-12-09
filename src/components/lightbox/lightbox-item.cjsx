@@ -7,7 +7,7 @@ content = require('./content')
 classnames = require('classnames')
 options = require('../../options')
 css = require('../../css').default
-getStyle = require './style'
+getStyle = require('./style').default
 module.exports = React.createClass
   getInitialState: -> {contentSize: {width: 0, height: 0}, loaded: false, lastActiveIndex: @props.activeIndex}
   calcStyle: ->

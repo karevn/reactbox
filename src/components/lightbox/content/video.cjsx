@@ -3,7 +3,7 @@ require('video.js/dist/video-js.css')
 React = require('react')
 ReactDOM = require('react-dom')
 Iframe = require('./iframe')
-getStyle = require '../style'
+getStyle = require('../style').default
 tests =
   youtube: /(.*(\(\/\/)?(www\.)?youtube\.com\/watch\?v=)|(.*(\/\/)?(www\.)?youtu\.be\/.*)|((https?:)?(\/\/)?(www\.)?youtube\.com\/embed\/)/
   vimeo: /(https?:)?(\/\/)?(www\.)?vimeo\.com\/\d+/
