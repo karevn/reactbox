@@ -6,7 +6,7 @@ Description = require('./description')
 content = require('./content')
 classnames = require('classnames')
 options = require('../../options')
-css = require '../../css'
+css = require('../../css').default
 getStyle = require './style'
 module.exports = React.createClass
   getInitialState: -> {contentSize: {width: 0, height: 0}, loaded: false, lastActiveIndex: @props.activeIndex}

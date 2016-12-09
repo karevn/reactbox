@@ -6,7 +6,6 @@ Toolbar = require('./toolbar')
 Lightbox = require('./lightbox').default
 Carousel = require('./carousel')
 classnames = require('classnames')
-options = require('../options').default
 getCarouselOptions = require('../options').getCarousel
 
 module.exports = React.createClass

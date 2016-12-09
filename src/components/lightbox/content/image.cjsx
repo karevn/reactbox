@@ -2,7 +2,7 @@ require('../../../../sass/content/image.sass')
 React = require('react')
 ReactDOM = require('react-dom')
 classnames = require('classnames')
-getStyle = require '../style.coffee'
+getStyle = require '../style'
 module.exports = React.createClass
   getInitialState: -> {width: 0, height: 0}
   componentDidMount: ->

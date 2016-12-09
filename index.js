@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom'
 
 import options from './src/options'
 import App from 'yaux/app'
@@ -6,6 +7,7 @@ import Lightbox from './src/components'
 import Keyboard from './src/keyboard'
 import Touch from './src/touch'
 import Deeplink from './src/deeplink'
+import Fullscreen from './src/fullscreen'
 
 function createWrapper() {
   const el = document.createElement('div')
@@ -38,8 +40,9 @@ export default function Reactbox (props) {
       return
     }
     keyboard.disable()
-    deeplink.reset()
-    fullscreen.exit()
+    Deeplink.reset()
+    Fullscreen.exit()
     touch.disable()
+    options.onUnmount()
   }
 }

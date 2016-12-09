@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+
 import Item from './lightbox-item'
 export default class Lightbox extends React.Component {
   constructor (props) {

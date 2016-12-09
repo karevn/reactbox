@@ -2,7 +2,7 @@ require('../../sass/carousel.sass')
 React = require('react')
 ReactDOM = require('react-dom')
 classnames = require('classnames')
-css = require '../css'
+css = require('../css').default
 
 prefixStyles = (styles)->
   Object.keys(styles).reduce( (result, key)->
