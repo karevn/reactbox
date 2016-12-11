@@ -1,6 +1,14 @@
 import fullscreen from './fullscreen';
 import deeplink from './deeplink';
 
+function prev(state){
+  if (state.activeIndex > 0) { state.activeIndex -=1; }
+      return deeplink.set(state.items[state.activeIndex]);
+}
+function next(state){
+  if (state.activeIndex < state.items.length - 1) { state.activeIndex += 1; }
+    return deeplink.set(state.items[state.activeIndex]);
+}
 export default {
   ['share.open'](state){
     return state.toolbar.shareActive = true;
@@ -8,14 +16,8 @@ export default {
   ['share.close'](state){
     return state.toolbar.shareActive = false;
   },
-  ['next'](state){
-    if (state.activeIndex < state.items.length - 1) { state.activeIndex += 1; }
-    return deeplink.set(state.items[state.activeIndex]);
-  },
-  ['prev'](state){
-    if (state.activeIndex > 0) { state.activeIndex -=1; }
-    return deeplink.set(state.items[state.activeIndex]);
-  },
+  next: next,
+  prev: prev,
   ['item.thumbnail.click'](state, item){
     state.activeIndex = item.index;
     return deeplink.set(state.items[state.activeIndex]);
@@ -41,19 +43,21 @@ export default {
     };
   },
   ['touch.move'](state, position){
-    let threshold = 45;
+    let threshold = 120;
     state.touch.offset = {
       x: position.x - state.touch.start.x,
       y: position.y - state.touch.start.y
     };
     if (state.touch.offset.x > threshold && state.activeIndex > 0) {
       state.touch.start = position;
-      return this.prev(state);
+      state.touch.offset = {x: 0, y: 0}
+      return prev(state);
     }
     if (state.touch.offset.x < -threshold &&
     state.activeIndex < state.items.length - 1) {
       state.touch.start = position;
-      return this.next(state);
+      state.touch.offset = {x: 0, y: 0}
+      return next(state);
     }
   },
   ['touch.end'](state, position){
