@@ -1,4 +1,4 @@
-require('../../../../sass/content/iframe.sass')
+require('./iframe.sass')
 import React from 'react'
 import ReactDOM from 'react-dom'
 import classnames from 'classnames'

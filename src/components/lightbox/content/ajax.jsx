@@ -1,4 +1,4 @@
-require('../../../../sass/content/ajax.sass')
+require('./ajax.sass')
 import React from 'react'
 import classnames from 'classnames'
 import ajax from 'atomicjs'

@@ -1,4 +1,4 @@
-require('../../../../sass/content/video.sass')
+require('./video.sass')
 require('video.js/dist/video-js.css')
 import React from 'react'
 import ReactDOM from 'react-dom'

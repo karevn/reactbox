@@ -1,4 +1,4 @@
-require('../../../sass/lightbox.sass')
+require('./index.sass')
 import classnames from 'classnames'
 
 import React from 'react'

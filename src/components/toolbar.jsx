@@ -1,4 +1,4 @@
-require('../../sass/toolbar.sass')
+require('./toolbar.sass')
 import React from 'react'
 import fullscreen from '../fullscreen'
 import share from '../share'

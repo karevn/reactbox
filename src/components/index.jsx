@@ -1,4 +1,4 @@
-require('../../sass/reactbox.sass')
+require('./index.sass')
 import React from 'react'
 import classnames from 'classnames'
 

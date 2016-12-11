@@ -1,4 +1,4 @@
-require('../../sass/carousel.sass')
+require('./carousel.sass')
 import React from 'react'
 import ReactDOM from 'react-dom'
 import classnames from 'classnames'

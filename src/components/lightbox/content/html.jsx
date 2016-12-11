@@ -1,4 +1,4 @@
-require('../../../../sass/content/html.sass')
+require('./html.sass')
 import React from 'react'
 
 export default class Html extends React.Component {

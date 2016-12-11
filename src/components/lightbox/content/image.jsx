@@ -1,4 +1,4 @@
-require('../../../../sass/content/image.sass')
+require('./image.sass')
 import React from 'react'
 import ReactDOM from 'react-dom'
 import classnames from 'classnames'

@@ -1,4 +1,4 @@
-require('../../../sass/lightbox-item.sass')
+require('./lightbox-item.sass')
 
 import React from 'react'
 import ReactDOM from 'react-dom'
