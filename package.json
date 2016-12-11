@@ -15,8 +15,8 @@
   "dependencies": {
     "classnames": "^2.2.3",
     "deepmerge": "^0.2.10",
-    "react": "^15.3.0",
-    "react-dom": "^15.3.0",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
     "react-scrollbar": "file:///Users/karevn/src/reactScrollbar",
     "uppercamelcase": "^1.1.0",
     "video.js": "^5.11.7",
