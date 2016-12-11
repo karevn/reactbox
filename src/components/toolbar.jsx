@@ -1,35 +1,15 @@
 require('./toolbar.sass')
 import React from 'react'
 import fullscreen from '../fullscreen'
-import {getShareUrl} from '../share'
+import ShareMenu from './share'
 
 const hasFullscreen = fullscreen.supports()
 
-function ShareMenu(props) {
-  return (
-    <div className="reactbox-share-menu">
-      { Object.keys(props.services).map((slug)=> {
-        const service = props.services[slug]
-        return (
-          <a target="_blank" className="reactbox-share-link"
-            key={slug}
-            onClick={(e)=> {e.preventDefault();
-              props.dispatch('share.close'); false}}
-            href={getShareUrl(service, props.activeItem)}>
-            <If condition={service.icon}>
-              <img src={service.icon} alt="" />
-            </If>
-            <If condition={!service.icon}>
-              <i className={`reactbox-icon-${slug}`} />
-            </If>
-            {service.name}
-          </a>
-        )
-      })
-      }
-    </div>
-  )
-}
+function Tooltip (props) {return (
+  <span className="reactbox-tooltip">{props.children}</span>)}
+
+function Icon (props){ return (
+  <i className={`reactbox-icon-${props.icon}`} />)}
 
 export default class Toolbar extends React.Component {
   constructor (props) {
@@ -62,12 +42,12 @@ export default class Toolbar extends React.Component {
       <div className="reactbox-toolbar">
         <a href="#" onClick={(e)=> {e.preventDefault(); props.dispatch('unmount');}}
           className="reactbox-toolbar-close reactbox-toolbar-link">
-          <i className="reactbox-icon-close" />
+          <Icon icon="close" />
         </a>
         <If condition={hasFullscreen && !props.toolbar.isFullscreen}>
           <a href="#" onClick={(e)=> {e.preventDefault(); props.dispatch('fullscreen.enter');}}
             className="reactbox-toolbar-fullscreen reactbox-toolbar-link">
-            <i className="reactbox-icon-fullscreen" />
+            <Icon icon="fullscreen" />
             <span className="reactbox-tooltip">
               {props.i18n.toolbar.fullscreen.enter}
             </span>
@@ -77,23 +57,21 @@ export default class Toolbar extends React.Component {
           <a href="#"
             className="reactbox-toolbar-link reactbox-toolbar-exit-fullscreen"
             onClick={(e)=> {e.preventDefault(); props.dispatch('fullscreen.exit');}}>
-            <i className="reactbox-icon-exit-fullscreen" />
-            <span className="reactbox-tooltip">
-              {props.i18n.toolbar.fullscreen.exit}</span>
+            <Icon icon="exit-fullscreen" />
+            <Tooltip>{props.i18n.toolbar.fullscreen.exit}</Tooltip>
           </a>
         </If>
         <If condition={activeItem && Object.keys(props.services).length > 0 &&
            props.toolbar.share}>
-          <div className="reactbox-toolbar-share">
+          <div className="reactbox-toolbar-link reactbox-toolbar-share">
             <i className="reactbox-icon-share"
               onClick={(e)=> {
                 e.preventDefault();
                 this.setState({'shareOpen': true});
                 props.dispatch('share.open'); }}></i>
-            <span className="reactbox-tooltip">
-              {props.i18n.toolbar.share}</span>
+            <Tooltip>{props.i18n.toolbar.share}</Tooltip>
             <If condition={props.toolbar.shareActive}>
-              <ShareMenu dispatch={props.dispatch}
+              <ShareMenu dispatch={props.dispatch} open={this.state.shareOpen}
                 services={props.services} activeItem={activeItem} />
             </If>
           </div>
@@ -102,9 +80,8 @@ export default class Toolbar extends React.Component {
           <a className="reactbox-toolbar-download reactbox-toolbar-link"
             download href={activeItem.download}
             target="_blank">
-            <i className="reactbox-icon-download" />
-            <span className="reactbox-tooltip">
-              {props.i18n.toolbar.download}</span>
+            <Icon icon="download" />
+            <Tooltip>{props.i18n.toolbar.download}</Tooltip>
           </a>
         </If>
       </div>
