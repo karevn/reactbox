@@ -1,18 +1,44 @@
+function aspect(thing) { return thing.width / thing.height }
 function resize(container, content, decision) {
-  const contentAspect = content.width / content.height
-  const containerAspect = container.width / container.height
-  const height = container.width / contentAspect
-  const width = container.height * contentAspect
-  if (decision(container, content)){
-    return {
-      width: container.width,
-      height: height,
-      top: (container.height - height) / 2,
-    }
-  } else return {
+  if (decision(aspect(container), aspect(content))){
+    return fitWidth(container, content)
+  } else {
+    return fitHeight(container, content)
+  }
+}
+function getHeight(container, content) {
+  return container.width / aspect(content)
+}
+function getWidth(container, content) {
+  return container.height * aspect(content)
+}
+function fitWidth (container, content) {
+  return {
+    width: container.width,
+    height: getHeight(container, content),
+  }
+}
+function fitHeight(container, content) {
+  return {
     height: container.height,
-    width: width,
-    left: (container.width - width) / 2,
+    width: getWidth(container, content),
+  }
+}
+
+function valign(container, size) {
+  return Object.assign({}, size, {top: (container.height - size.height) / 2})
+}
+function halign(container, size) {
+  return Object.assign({}, size, {left: (container.width - size.width) / 2})
+}
+export function align(container, size) {
+  if (!container || !size) {
+    return null
+  }
+  if (size.width > container.width) {
+    return valign(container, size)
+  } else {
+    return halign(container, size)
   }
 }
 

@@ -11,6 +11,17 @@ let prefixedKeys = {
     'display': ['flex']
   }
 });
+function mapObject(object, callback) {
+  if (!object) {
+    return object
+  }
+  return Object.keys(object).reduce((result, key)=>{
+    result[key] = callback(object[key], key, object)
+    return result
+  }, {})
+}
+function concatWith(suffix) {return function(str) {return str + suffix}}
+export function pixels(style){ return mapObject(style, concatWith("px")) }
 export default {
   prefix(styles){
     return Object.keys(styles).reduce( function(result, key){

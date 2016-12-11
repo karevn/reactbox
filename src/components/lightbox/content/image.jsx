@@ -3,7 +3,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 import getStyle from '../style'
-import {fit, fill} from './resize'
+import {fit, fill, align} from './resize'
+import {pixels} from '../../../css'
 
 export default class Image extends React.Component {
   constructor (props) {
@@ -37,7 +38,7 @@ export default class Image extends React.Component {
     return (
       <div className="reactbox-lightbox-item-object reactbox-object-image">
       <img className="reactbox-lightbox-content-image"
-        style={this.getImageStyle()}
+        style={pixels(align(this.state, this.getImageStyle()))}
         src={props.item.url}
         onLoad={(event)=> {
           props.item.size = {
