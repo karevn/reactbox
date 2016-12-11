@@ -1,20 +1,19 @@
+@keyframes reactbox-circle
+  0%
+    transform: rotate(0)
+  100%
+    transform: rotate(360deg)
+
 div.reactbox-loading
-	display: block
-	position: absolute
-	top: 50%
-	left: 50%
-	color: white
-	height: 72px
-	width: 72x
-	margin-top: -36px
-	margin-left: -36px
-	clip-path: circle(36px at 36px 36px)
-	transition: transform 0.5s
-	&:before
-		animation: reactbox-spin 2s infinite linear
-		font-size: 48px
-		transform:  matrix(-1, 0, 0, 1, 0, 0)
-		position: absolute
-		top: 6px
-		left: 6px
-		margin: 0
+  position: absolute
+  display: block
+  border: 6px solid #D0D0D0
+  border-left-color: #333
+  border-radius: 100%
+  top: 50%
+  left: 50%
+  height: 42px
+  width: 42px
+  margin-top: -36px
+  margin-left: -36px
+  animation: reactbox-circle infinite .75s linear
