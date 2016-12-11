@@ -1,50 +1,47 @@
-.reactbox-toolbar-wrapper
-  position: fixed
-  left: 0
+div.reactbox-toolbar
   top: 0
   right: 0
+  padding: 0
+  height: 42px
+  position: fixed
+  transition: opacity 0.3s
+  top: 3px
+  right: 15px
+  font-size: 13px
+  text-transform: none
   z-index: 100005
-  .reactbox-toolbar
-    position: absolute
+  a.reactbox-toolbar-link, .reactbox-toolbar-share
+    position: relative
+    float: right
+    font-size: 15px
+    font-weight: 200
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif
+    border: none
+    line-height: 1
     padding: 0
-    height: 42px
-    transition: opacity 0.3s
-    top: 3px
-    right: 15px
-    font-size: 13px
+    margin: 0 0 0 18px
+    background: transparent
+    color: white
+    text-decoration: none
+    color: #aaa
+    line-height: 40px
+    transition: color 0.3s
+    cursor: pointer
     text-transform: none
-    a.reactbox-toolbar-link, .reactbox-toolbar-share
-      position: relative
-      float: right
-      font-size: 15px
-      font-weight: 200
-      font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif
-      border: none
-      line-height: 1
-      padding: 0
-      margin: 0 0 0 18px
-      background: transparent
-      color: white
-      text-decoration: none
-      color: #aaa
-      line-height: 40px
-      transition: color 0.3s
-      cursor: pointer
-      text-transform: none
+    outline: none
+    &.reactbox-disabled
+      display: none
+    &:active
+      box-shadow: none
       outline: none
-      &.reactbox-disabled
-        display: none
-      &:active
-        box-shadow: none
-        outline: none
-      &.reactbox-toolbar-close
+    &.reactbox-toolbar-close
+      opacity: 1
+      color: white
+    &:hover
+      color: white
+      outline: none
+      .reactbox-tooltip
         opacity: 1
-        color: white
-      &:hover
-        color: white
-        outline: none
-        .reactbox-tooltip
-          opacity: 1
 .reactbox-share-menu
   position: absolute
   top: 100%
