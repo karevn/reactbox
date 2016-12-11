@@ -9,15 +9,22 @@ import Touch from './src/touch'
 import Deeplink from './src/deeplink'
 import Fullscreen from './src/fullscreen'
 
-function createWrapper() {
+function propOrProps(prop, options) {
+  if (options[prop]) {
+    return [options[prop]]
+  }
+  return options[prop+'s']
+}
+function createWrapper(options) {
   const el = document.createElement('div')
   el.id = "reactbox-wrapper"
+  propOrProps('extraClass', options).forEach((klass)=>el.classList.add(klass))
   document.body.appendChild(el)
   return el
 }
 
 export default function Reactbox (props) {
-  const el = createWrapper()
+  const el = createWrapper(props)
   const unmount = props.onUnmount
   options.onUnmount = (component)=> {
     if (unmount){
