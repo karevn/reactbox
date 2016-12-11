@@ -44,7 +44,7 @@ const formatters = {
 
 function getSrc (item) {
   const url = item.url
-  service = Object.keys(tests).find((key)=> url.match(tests[key]))
+  const service = Object.keys(tests).find((key)=> url.match(tests[key]))
   const id = extractors[service](url)
   return formatters[service](id)
 }

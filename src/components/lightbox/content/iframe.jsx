@@ -30,7 +30,7 @@ export default class Iframe extends React.Component {
       <div className={classnames('reactbox-lightbox-item-object',
         'reactbox-object-iframe', props.className)}>
         <iframe src={props.src}
-          style={pixels(thi.state.size)}
+          style={pixels(this.state.size)}
           onLoad={()=> props.dispatch('item.load', props.item)} />
       </div>
     )

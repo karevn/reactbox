@@ -6,7 +6,7 @@ import Scrollbar from 'react-scrollbar'
 
 import getStyle from './style'
 
-export default class Description {
+export default class Description extends React.Component {
   shouldComponentUpdate () { return false }
   render (props = this.props) {
     const item = props.item
