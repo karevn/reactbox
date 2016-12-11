@@ -18,38 +18,44 @@ function propOrProps(prop, options) {
 function createWrapper(options) {
   const el = document.createElement('div')
   el.id = "reactbox-wrapper"
-  propOrProps('extraClass', options).forEach((klass)=>el.classList.add(klass))
+  let extraClasses
+  if (extraClasses = propOrProps('extraClass', options)){
+    extraClasses.forEach((klass)=>el.classList.add(klass))
+  }
   document.body.appendChild(el)
   return el
 }
 
 export default function Reactbox (props) {
-  const el = createWrapper(props)
-  const unmount = props.onUnmount
-  options.onUnmount = (component)=> {
-    if (unmount){
-      unmount(component)
+  return new Promise((resolve, reject)=>{
+    const el = createWrapper(props)
+    const unmount = props.onUnmount
+    options.onUnmount = (component)=> {
+      if (unmount){
+        unmount(component)
+      }
+      ReactDOM.unmountComponentAtNode(el)
+      el.remove()
     }
-    ReactDOM.unmountComponentAtNode(el)
-    el.remove()
-  }
-  const state = options(props)
-  const app = new App(state, [store], el, Lightbox)
-  const keyboard = Keyboard(app.store.dispatch)
-  const touch = Touch(app.store.dispatch)
-  Deeplink.init()
-  Deeplink.set(app.store.state.items[app.store.state.activeIndex])
-  keyboard.enable()
-  touch.enable()
-  app.store.dispatch('init')
-  app.store.onDispatch = function(action, params) {
-    if (action !== 'unmount') {
-      return
+    const state = options(props)
+    const app = new App(state, [store], el, Lightbox)
+    const keyboard = Keyboard(app.store.dispatch)
+    const touch = Touch(app.store.dispatch)
+    Deeplink.init()
+    Deeplink.set(app.store.state.items[app.store.state.activeIndex])
+    keyboard.enable()
+    touch.enable()
+    app.store.dispatch('init')
+    app.store.onDispatch = function(action, params) {
+      if (action !== 'unmount') {
+        return
+      }
+      keyboard.disable()
+      Deeplink.reset()
+      Fullscreen.exit()
+      touch.disable()
+      options.onUnmount()
+      resolve(app.store.state.items[app.store.state.activeIndex])
     }
-    keyboard.disable()
-    Deeplink.reset()
-    Fullscreen.exit()
-    touch.disable()
-    options.onUnmount()
-  }
+  })
 }
