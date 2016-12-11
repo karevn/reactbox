@@ -9,40 +9,42 @@ function next(state){
   if (state.activeIndex < state.items.length - 1) { state.activeIndex += 1; }
     return deeplink.set(state.items[state.activeIndex]);
 }
+function getItem(state, item){
+  return state.items[item.index]
+}
 export default {
-  ['share.open'](state){
+  'share.open': function (state){
     return state.toolbar.shareActive = true;
   },
-  ['share.close'](state){
+  'share.close': function(state){
     return state.toolbar.shareActive = false;
   },
   next: next,
   prev: prev,
-  ['item.thumbnail.click'](state, item){
+  'item.thumbnail.click': function(state, item){
     state.activeIndex = item.index;
     return deeplink.set(state.items[state.activeIndex]);
   },
-
-  ['item.load'](state, item){
-    return item.loaded = true;
+ 'item.load': function(state, item){
+    getItem(state, item).loaded = true
   },
-  ['item.unload'](state, item){
-    return item.loaded = false;
-  },
-
-  ['item.thumbnail.load'](state, item){
-    return item.thumbnailLoaded = true;
-  },
-  ['item.thumbnail.error'](state, item){
-    return item.thumbnailError = true;
+  'item.unload': function(state, item){
+    getItem(state, item).loaded = false
   },
 
-  ['touch.start'](state, position){
+  'item.thumbnail.load': function(state, item){
+    getItem(state, item).thumbnailLoaded = true;
+  },
+  'item.thumbnail.error': function(state, item){
+    getItem(state, item).thumbnailError = true;
+  },
+
+  'touch.start': function(state, position){
     return state.touch = {
       start: position
     };
   },
-  ['touch.move'](state, position){
+  'touch.move': function(state, position){
     let threshold = 120;
     state.touch.offset = {
       x: position.x - state.touch.start.x,
@@ -60,14 +62,14 @@ export default {
       return next(state);
     }
   },
-  ['touch.end'](state, position){
+  'touch.end': function(state, position){
     return delete state.touch;
   },
-  ['fullscreen.enter'](state){
+  'fullscreen.enter': function(state){
     fullscreen.enter();
     return state.toolbar.isFullscreen = true;
   },
-  ['fullscreen.exit'](state){
+  'fullscreen.exit': function(state){
     fullscreen.exit();
     return state.toolbar.isFullscreen = false;
   }
