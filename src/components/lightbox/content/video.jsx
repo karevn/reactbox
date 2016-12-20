@@ -4,7 +4,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Iframe from './iframe'
 import getStyle from '../style'
-import {fit} from './resize'
+import {fit, align} from './resize'
 
 function applyIf(condition, callback, value) {
   if (condition) {
@@ -89,7 +89,7 @@ class VideoJSVideo extends React.Component {
           window.addEventListener('resize', this.onResize)
           loadVideoJS().then(()=> {
             props.dispatch('item.load', props.item)
-            player = videojs(this.getVideoId())
+            const player = videojs(this.getVideoId())
             player.ready(()=>this.setState({player: player}))
            })
         })
@@ -121,9 +121,7 @@ class VideoJSVideo extends React.Component {
   getIframeStyle (item) {
     const content = {width: 1280, height: 720}
     const container = this.state.size
-    if (this.props.full) {
-      return container
-    }
+    return container
     return applyIf(this.props.vAlign, align, fit(content, container))
   }
 
