@@ -34,14 +34,11 @@
   top: 54px
   bottom: 0px
   width: 60px
-  i
-    text-align: center
-    display: inline-block
-    width: 100%
-    +reactbox-icon
-    margin: -72px 0 0 0
+  svg
+    margin: -70px 0 0 0
     padding: 15px 0
     top: 50%
+    position: absolute
     &:before
       margin: 0
 .reactbox-has-carousel
@@ -51,20 +48,12 @@
       margin-top: -28px
 .reactbox-prev
   left: 0
-  width: 54px
-  i
-    border-radius: 0 4px 4px 0
-    &:before
-      content: '\e800'
-      transform: rotate(180deg)
-      transform-origin: 50% 50%
+  svg
+    left: -16px
 .reactbox-next
   right: 0
-  i
-    border-radius: 4px 0 0 4px
-    &:before
-      content: '\e800'
-      transform-origin: 50% 50%
+  svg
+    right: -16px
 @media screen and (orientation: portrait)
   .reactbox
     .reactbox-next, .reactbox-prev

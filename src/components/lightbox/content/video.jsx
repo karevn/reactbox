@@ -5,7 +5,7 @@ import Iframe from './iframe'
 import getStyle from '../style'
 import {fit, align} from './resize'
 
-function load(tag, id, srcAttr, srcVal){
+function load(tag, id, srcAttr, srcVal, attr){
   return new Promise((resolve, reject)=>{
     let el = document.getElementById(id)
     if (el) {

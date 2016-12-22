@@ -19,8 +19,8 @@ export default function ShareMenu(props) {
             <If condition={service.icon}>
               <img src={service.icon} alt="" />
             </If>
-            <If condition={!service.icon}>
-              <i className={`reactbox-icon-${slug}`} />
+            <If condition={!service.icon && !!service.component}>
+              { React.createElement(service.component) }
             </If>
             {service.name}
           </a>

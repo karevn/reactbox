@@ -13,13 +13,13 @@
   "scripts": {},
   "devDependencies": {},
   "dependencies": {
-    "classnames": "^2.2.3",
-    "deepmerge": "^0.2.10",
+    "classnames": "^2.2.5",
+    "deepmerge": "^1.3.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
-    "react-scrollbar": "file:///Users/karevn/src/reactScrollbar",
+    "react-icons": "^2.2.2",
+    "react-scrollbar": "^0.5.0",
     "uppercamelcase": "^1.1.0",
-    "video.js": "^5.11.7",
-    "yaux": "^0.1.0"
+    "yaux": "file:///Users/karevn/src/yaux"
   }
 }

@@ -3,6 +3,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 
+import CloseIcon from 'react-icons/md/close'
+
 import css from '../css'
 
 function prefixStyles (styles) {
@@ -71,8 +73,7 @@ class Item extends React.Component {
               ref={this.onImageMounted}
               />
         </If>
-        <If condition={props.item.error}>
-          <i className="reactbox-icon-close" /></If>
+        <If condition={props.item.error}><CloseIcon /></If>
       </div>
     )
   }

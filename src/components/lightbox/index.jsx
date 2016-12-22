@@ -5,6 +5,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import Item from './lightbox-item'
+
+import LeftIcon from 'react-icons/fa/angle-left'
+import RightIcon from 'react-icons/fa/angle-right'
+
 export default class Lightbox extends React.Component {
   constructor (props) {
     super(props)
@@ -43,12 +47,16 @@ export default class Lightbox extends React.Component {
         <If condition={this.props.items.length > 1}>
           <div className={classnames(['reactbox-prev'],
             {'reactbox-disabled': this.props.activeIndex == 0})}
-            onClick={ ()=> {props.dispatch('prev')}}><i /></div>
+            onClick={ ()=> {props.dispatch('prev')}}>
+            <LeftIcon size={100}/>
+          </div>
         </If>
         <If condition={props.items.length > 1}>
           <div className={classnames(['reactbox-next', {
             'reactbox-disabled': props.activeIndex >= props.items.length - 1
-            }])} onClick={ () => {props.dispatch('next')}}><i /></div>
+            }])} onClick={ () => {props.dispatch('next')}}>
+            <RightIcon size={100}/>
+          </div>
         </If>
         <If condition={this.state.metrics}>
             {items.map((item)=> {return (<Item {...props} item={item} metrics={this.state.metrics} key={item.index} />)})}

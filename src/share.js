@@ -1,39 +1,58 @@
+import FacebookIcon from 'react-icons/fa/facebook'
+import TwitterIcon from 'react-icons/fa/twitter'
+import GooglePlusIcon from 'react-icons/fa/google-plus'
+import RedditIcon from 'react-icons/fa/reddit'
+import DiggIcon from 'react-icons/fa/digg'
+import StumbleUponIcon from 'react-icons/fa/stumbleupon'
+import DeliciousIcon from 'react-icons/fa/delicious'
+import PinterestIcon from 'react-icons/fa/pinterest'
+import VkIcon from 'react-icons/fa/vk'
+
 const services = {
   facebook: {
     url: "//www.facebook.com/share.php?v=4&src=bm&u=%url%",
-    name: 'Facebook'
+    name: 'Facebook',
+    component: FacebookIcon,
   },
   twitter: {
     url: "//twitter.com/home?status=%url%",
-    name: 'Twitter'
+    name: 'Twitter',
+    component: TwitterIcon
   },
   googleplus: {
     url: "//plus.google.com/share?url=%url%",
-    name: 'Google Plus'
+    name: 'Google Plus',
+    component: GooglePlusIcon,
   },
   reddit: {
     url: "//reddit.com/submit?url=%url%",
-    name: 'Reddit'
+    name: 'Reddit',
+    component: RedditIcon,
   },
   digg: {
     url: "//digg.com/submit?phase=2&url=%url%",
-    name: 'Digg'
+    name: 'Digg',
+    component: DiggIcon,
   },
   stumbleupon: {
     url: "http://www.stumbleupon.com/submit?url=%url%&title=%title%",
-    name: "Stumbleupon"
+    name: "Stumbleupon",
+    component: StumbleUponIcon,
   },
   delicious: {
     url: "//delicious.com/post?url=%url%",
-    name: 'Delicious'
+    name: 'Delicious',
+    component: DeliciousIcon,
   },
   pinterest: {
     url: "https://www.pinterest.com/pin/create/button/?url=%url%&media=%image_url%&description=%description%&title=%title%",
-    name: 'Pinterest'
+    name: 'Pinterest',
+    component: PinterestIcon,
   },
   vk: {
     url: "http://vk.com/share.php?url=%url%",
-    name: 'VK'
+    name: 'VK',
+    component: VkIcon,
   }
 }
 export { services }
