@@ -1,10 +1,30 @@
 require('./video.sass')
-require('video.js/dist/video-js.css')
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Iframe from './iframe'
 import getStyle from '../style'
 import {fit, align} from './resize'
+
+function load(tag, id, srcAttr, srcVal){
+  return new Promise((resolve, reject)=>{
+    let el = document.getElementById(id)
+    if (el) {
+      el.addEventListener('load', resolve)
+      resolve()
+    }
+    el = document.createElement(tag)
+    el.id = id
+    el[srcAttr] = srcVal
+    if (attr) {
+      Object.keys(attr).forEach((key)=>{
+        el.setAttribute(key, attr[key])
+      })
+    }
+    document.head.appendChild(el)
+    el.addEventListener('load', resolve)
+    el.addEventListener('error', reject)
+  })
+}
 
 function applyIf(condition, callback, value) {
   if (condition) {
@@ -55,23 +75,12 @@ function IframeVideo (props) {
     vAlign={getStyle(props.item) !== 'right'}
     fitWidth={getStyle(props.item) === 'bottom'}/>)
 }
-
 function loadVideoJS (callback) {
-  return new Promise((resolve, reject)=>{
-    if (typeof window.videojs !== 'undefined'){
-      resolve()
-    }
-    let script
-    if (! (script = document.getElementById ('reactbox-video-js-loader'))) {
-      script = document.createElement('script')
-      script.id = 'reactbox-video-js-loader'
-      script.src =
-        'https://cdnjs.cloudflare.com/ajax/libs/video.js/5.10.7/video.js'
-      document.body.appendChild(script)
-    }
-    script.addEventListener('load', resolve)
-    script.addEventListener('error', reject)
-  })
+  return Promise.all(load('script', 'reactbox-video-js-loader', 'src',
+    'https://cdnjs.cloudflare.com/ajax/libs/video.js/5.10.7/video.js'),
+  load('link', 'reactbox-video-js-css', 'href',
+    'https://cdnjs.cloudflare.com/ajax/libs/video.js/5.10.7/video-js.min.css',
+    {rel: 'stylesheet'}))
 }
 
 
