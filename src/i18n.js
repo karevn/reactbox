@@ -7,4 +7,4 @@ export default {
       exit: 'Exit fullscreen'
     }
   }
-};
+}

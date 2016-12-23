@@ -10,63 +10,64 @@ import VkIcon from 'react-icons/fa/vk'
 
 const services = {
   facebook: {
-    url: "//www.facebook.com/share.php?v=4&src=bm&u=%url%",
+    url: '//www.facebook.com/share.php?v=4&src=bm&u=%url%',
     name: 'Facebook',
-    component: FacebookIcon,
+    component: FacebookIcon
   },
   twitter: {
-    url: "//twitter.com/home?status=%url%",
+    url: '//twitter.com/home?status=%url%',
     name: 'Twitter',
     component: TwitterIcon
   },
   googleplus: {
-    url: "//plus.google.com/share?url=%url%",
+    url: '//plus.google.com/share?url=%url%',
     name: 'Google Plus',
-    component: GooglePlusIcon,
+    component: GooglePlusIcon
   },
   reddit: {
-    url: "//reddit.com/submit?url=%url%",
+    url: '//reddit.com/submit?url=%url%',
     name: 'Reddit',
-    component: RedditIcon,
+    component: RedditIcon
   },
   digg: {
-    url: "//digg.com/submit?phase=2&url=%url%",
+    url: '//digg.com/submit?phase=2&url=%url%',
     name: 'Digg',
-    component: DiggIcon,
+    component: DiggIcon
   },
   stumbleupon: {
-    url: "http://www.stumbleupon.com/submit?url=%url%&title=%title%",
-    name: "Stumbleupon",
-    component: StumbleUponIcon,
+    url: 'http://www.stumbleupon.com/submit?url=%url%&title=%title%',
+    name: 'Stumbleupon',
+    component: StumbleUponIcon
   },
   delicious: {
-    url: "//delicious.com/post?url=%url%",
+    url: '//delicious.com/post?url=%url%',
     name: 'Delicious',
-    component: DeliciousIcon,
+    component: DeliciousIcon
   },
   pinterest: {
-    url: "https://www.pinterest.com/pin/create/button/?url=%url%&media=%image_url%&description=%description%&title=%title%",
+    url: 'https://www.pinterest.com/pin/create/button/?url=%url%&media=%image_url%&description=%description%&title=%title%',
     name: 'Pinterest',
-    component: PinterestIcon,
+    component: PinterestIcon
   },
   vk: {
-    url: "http://vk.com/share.php?url=%url%",
+    url: 'http://vk.com/share.php?url=%url%',
     name: 'VK',
-    component: VkIcon,
+    component: VkIcon
   }
 }
 export { services }
-export function getShareUrl(service, item){
+export function getShareUrl(service, item) {
   let tags = {
     url: window.location.href,
     image_url: __guard__(item.urls, x => x.image),
     title: item.title,
     description: item.description || ''
-  };
-  return Object.keys(tags).reduce(((url, tag)=>
-    url.replace(`%${tag}%`, encodeURIComponent(tags[tag]))), service.url);
+  }
+  return Object.keys(tags).reduce((url, tag) =>
+    url.replace(`%${tag}%`, encodeURIComponent(tags[tag])), service.url)
 }
 
 function __guard__(value, transform) {
-  return (typeof value !== 'undefined' && value !== null) ? transform(value) : undefined;
+  return (typeof value !== 'undefined' && value !== null) ? transform(value)
+    : undefined
 }

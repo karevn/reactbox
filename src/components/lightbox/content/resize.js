@@ -1,6 +1,6 @@
 function aspect(thing) { return thing.width / thing.height }
 function resize(container, content, decision) {
-  if (decision(aspect(container), aspect(content))){
+  if (decision(aspect(container), aspect(content))) {
     return fitWidth(container, content)
   } else {
     return fitHeight(container, content)
@@ -15,13 +15,13 @@ function getWidth(container, content) {
 function fitWidth (container, content) {
   return {
     width: container.width,
-    height: getHeight(container, content),
+    height: getHeight(container, content)
   }
 }
 function fitHeight(container, content) {
   return {
     height: container.height,
-    width: getWidth(container, content),
+    width: getWidth(container, content)
   }
 }
 
@@ -43,9 +43,9 @@ export function align(container, size) {
 }
 
 export function fit (container, content) {
-  return resize(container, content, (container, content)=>container<content)
+  return resize(container, content, (container, content) => container < content)
 }
 
 export function fill (container, content) {
-  return resize(container, content, (container, content)=>container>content)
+  return resize(container, content, (container, content) => container > content)
 }

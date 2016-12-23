@@ -1,42 +1,45 @@
-import deepmerge from 'deepmerge';
-import i18n from '../src/i18n';
+import deepmerge from 'deepmerge'
+import i18n from '../src/i18n'
+import {services} from './share'
 
-function guessType(url){
+function guessType(url) {
   if (url.match(/\.(jpg|jpeg|png|gif|bmp|jfif|tif|jpe)$/i)) {
-    return 'image';
+    return 'image'
   }
   if (url.match(/(youtube\.com|youtu\.be|vimeo\.com|\.mp4$)/i)) {
-    return 'video';
+    return 'video'
   }
   if (url.match(/\.(html?$|php$|google\.com\/maps\/embed)/i)) {
-    return 'iframe';
+    return 'iframe'
   }
-  return 'image';
+  return 'image'
 };
 
-export default function(options){
+export default function(options) {
   options = deepmerge({
-    services: require('./share').services,
+    services: services,
     toolbar: {share: true},
     i18n,
     activeIndex: 0,
     carousel: true
-  }, options);
-  options.items.forEach(function(item, index){
-    item.index = index;
+  }, options)
+  options.items.forEach(function(item, index) {
+    item.index = index
     if (!item.type) {
-      return item.type = item.url ? guessType(item.url) : 'image';
+      item.type = item.url ? guessType(item.url) : 'image'
     }
-  });
-  return options;
-};
-
-export function getContentType(item){
-  if (item.type) { return item.type; }
-  if (item.html) { return 'html'; }
-  return 'image';
+  })
+  return options
 }
-export function getCarousel(prop){
-  if (prop.items.length <= 1) { return false; }
-  return prop.carousel && window.innerWidth > 768;
+
+export function getContentType(item) {
+  if (item.type) { return item.type }
+  if (item.html) { return 'html' }
+  return 'image'
+}
+export function getCarousel(prop) {
+  if (prop.items.length <= 1) {
+    return false
+  }
+  return prop.carousel && window.innerWidth > 768
 }

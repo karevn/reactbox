@@ -1,25 +1,28 @@
-let hash = null;
+/* global location */
+let hash = null
 export default {
-  init(){
-    if (location.hash) { return hash = location.hash; }
+  init() {
+    if (location.hash) {
+      hash = location.hash
+    }
   },
-  set(item){
+  set(item) {
     try {
       if (item.hash) {
-        return location.hash = item.hash;
+        location.hash = item.hash
       } else {
-        return location.hash = hash ? hash : '';
+        location.hash = hash || ''
       }
     } catch (error) {}
   },
   reset() {
     try {
       if (hash) {
-        location.hash = hash;
+        location.hash = hash
       } else {
-        location.hash = '';
+        location.hash = ''
       }
     } catch (error) {}
-    return hash = null;
+    hash = null
   }
-};
+}

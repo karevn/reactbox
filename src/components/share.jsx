@@ -1,4 +1,4 @@
-require('./share.sass')
+import './share.sass'
 
 import React from 'react'
 import classnames from 'classnames'

@@ -1,4 +1,5 @@
-require('./description.sass')
+import './description.sass'
+
 import React from 'react'
 import classnames from 'classnames'
 

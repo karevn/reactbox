@@ -1,4 +1,5 @@
-require('./toolbar.sass')
+import './toolbar.sass'
+
 import React from 'react'
 import fullscreen from '../fullscreen'
 import ShareMenu from './share'

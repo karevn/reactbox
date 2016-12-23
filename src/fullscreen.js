@@ -1,33 +1,35 @@
-let prefix = prop=> ['moz', 'ms', 'webkit'].map(prefix=> `${prefix}${prop}`);
+let prefix = prop => ['moz', 'ms', 'webkit'].map(prefix => `${prefix}${prop}`)
 export default {
   supports() {
-    let el = document.documentElement;
-    if (el.requestFullscreen) { return true; }
+    let el = document.documentElement
+    if (el.requestFullscreen) { return true }
     for (let prefixed of prefix('RequestFullScreen')) {
-      if (el[prefixed]) { return true; }
+      if (el[prefixed]) { return true }
     }
-    return false;
+    return false
   },
   is() {
     for (let method of ['fullscreenEnabled', 'webkitFullscreenEnabled',
-        'mozFullscreenEnabled', 'msFullscreenEnabled']) {
-      if (document[method]) { return document[method]; }
+      'mozFullscreenEnabled', 'msFullscreenEnabled']) {
+      if (document[method]) {
+        return document[method]
+      }
     }
-    return null;
+    return null
   },
-  enter(el){
-    if (!el) { el = document.documentElement; }
+  enter(el) {
+    if (!el) { el = document.documentElement }
     let method = el.requestFullScreen || el.webkitRequestFullScreen ||
-      el.mozRequestFullScreen || el.msRequestFullScreen;
-    return method.apply(el);
+      el.mozRequestFullScreen || el.msRequestFullScreen
+    return method.apply(el)
   },
   exit() {
-    let el = document.documentElement;
+    let el = document.documentElement
     let method = el.exitFullscreen || el.mozCancelFullScreen ||
-      el.msExitFullscreen;
-    if (method) { method.apply(el); }
+      el.msExitFullscreen
+    if (method) { method.apply(el) }
     if (document.webkitExitFullscreen) {
-      return document.webkitExitFullscreen();
+      return document.webkitExitFullscreen()
     }
   }
-};
+}

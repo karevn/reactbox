@@ -13,25 +13,25 @@ function propOrProps(prop, options) {
   if (options[prop]) {
     return [options[prop]]
   }
-  return options[prop+'s']
+  return options[prop + 's']
 }
 function createWrapper(options) {
   const el = document.createElement('div')
-  el.id = "reactbox-wrapper"
-  let extraClasses
-  if (extraClasses = propOrProps('extraClass', options)){
-    extraClasses.forEach((klass)=>el.classList.add(klass))
+  el.id = 'reactbox-wrapper'
+  const extraClasses = propOrProps('extraClass', options)
+  if (extraClasses) {
+    extraClasses.forEach(klass => el.classList.add(klass))
   }
   document.body.appendChild(el)
   return el
 }
 
 export default function Reactbox (props) {
-  return new Promise((resolve, reject)=>{
+  return new Promise((resolve, reject) => {
     const el = createWrapper(props)
     const unmount = props.onUnmount
-    options.onUnmount = (component)=> {
-      if (unmount){
+    options.onUnmount = component => {
+      if (unmount) {
         unmount(component)
       }
       ReactDOM.unmountComponentAtNode(el)

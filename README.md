@@ -47,7 +47,7 @@ will open Reactbox with the options specified (see options docs below).
 ## React usage
 
 ```jsx
-Reactbox = require('reactbox')
+import Reactbox = from 'reactbox'
 ...
 <Reactbox items={items} carousel={true} />
 
