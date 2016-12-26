@@ -1,7 +1,6 @@
 import './ajax.sass'
 
 import React from 'react'
-import classnames from 'classnames'
 import ajax from 'atomicjs'
 
 export default class Ajax extends React.Component {
@@ -12,11 +11,14 @@ export default class Ajax extends React.Component {
     this.onAjaxError = ::this.onAjaxError
   }
 
-  componentDidMount () { ajax.get(this.props.item.url)
-    .success(this.onAjaxLoaded).error(this.onAjaxError) }
+  componentDidMount () {
+    ajax.get(this.props.item.url)
+    .success(this.onAjaxLoaded).error(this.onAjaxError)
+  }
 
-  onAjaxError (error) {
-    this.props.dispatch('item.error', this.props.item) }
+  onAjaxError () {
+    this.props.dispatch('item.error', this.props.item)
+  }
 
   onAjaxLoaded (response) {
     this.setState({html: response.data})

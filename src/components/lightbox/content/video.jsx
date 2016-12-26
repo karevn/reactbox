@@ -3,10 +3,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Iframe from './iframe'
 import getStyle from '../style'
-import {fit, align} from './resize'
 
-function load(tag, id, srcAttr, srcVal, attr){
-  return new Promise((resolve, reject)=>{
+function load(tag, id, srcAttr, srcVal, attr) {
+  return new Promise((resolve, reject) => {
     let el = document.getElementById(id)
     if (el) {
       el.addEventListener('load', resolve)
@@ -16,7 +15,7 @@ function load(tag, id, srcAttr, srcVal, attr){
     el.id = id
     el[srcAttr] = srcVal
     if (attr) {
-      Object.keys(attr).forEach((key)=>{
+      Object.keys(attr).forEach(key => {
         el.setAttribute(key, attr[key])
       })
     }
@@ -26,26 +25,19 @@ function load(tag, id, srcAttr, srcVal, attr){
   })
 }
 
-function applyIf(condition, callback, value) {
-  if (condition) {
-    return callback(value)
-  }
-  return value
-}
-
 const tests = {
   youtube: /(.*(\(\/\/)?(www\.)?youtube\.com\/watch\?v=)|(.*(\/\/)?(www\.)?youtu\.be\/.*)|((https?:)?(\/\/)?(www\.)?youtube\.com\/embed\/)/,
   vimeo: /(https?:)?(\/\/)?(www\.)?vimeo\.com\/\d+/,
-  mp4: /\.mp4$/,
+  mp4: /\.mp4$/
 }
 
 const extractors = {
   youtube: function (url) {
     let regex
-    if (url.match(regex = /.*(\(\/\/)?(www\.)?youtube\.com\/watch\?v=/)){
+    if (url.match(regex = /.*(\(\/\/)?(www\.)?youtube\.com\/watch\?v=/)) {
       return url.replace(regex, '')
     }
-    if (url.match(regex = /.*(\/\/)?(www\.)?youtu\.be\//)){
+    if (url.match(regex = /.*(\/\/)?(www\.)?youtu\.be\//)) {
       return url.replace(regex, '')
     }
     return url.replace(/(https?:)?(\/\/)?(www\.)?youtube\.com\/embed\//, '')
@@ -57,14 +49,14 @@ const extractors = {
 }
 
 const formatters = {
-  youtube: (id)=>`https://youtube.com/embed/${id}`,
-  vimeo: (id)=>`https://player.vimeo.com/video/${id}`,
-  mp4: (id)=>id,
+  youtube: id => `https://youtube.com/embed/${id}`,
+  vimeo: id => `https://player.vimeo.com/video/${id}`,
+  mp4: id => id
 }
 
 function getSrc (item) {
   const url = item.url
-  const service = Object.keys(tests).find((key)=> url.match(tests[key]))
+  const service = Object.keys(tests).find(key => url.match(tests[key]))
   const id = extractors[service](url)
   return formatters[service](id)
 }
@@ -83,7 +75,6 @@ function loadVideoJS (callback) {
     {rel: 'stylesheet'}))
 }
 
-
 class VideoJSVideo extends React.Component {
   constructor (props) {
     super(props)
@@ -92,15 +83,15 @@ class VideoJSVideo extends React.Component {
   }
   componentDidMount () {
     const props = this.props
-    loadVideoJS().then(()=> {
-      props.dispatch('item.load', props.item).then(()=>{
-        this.updateSize(()=> {
+    loadVideoJS().then(() => {
+      props.dispatch('item.load', props.item).then(() => {
+        this.updateSize(() => {
           window.addEventListener('resize', this.onResize)
-          loadVideoJS().then(()=> {
+          loadVideoJS().then(() => {
             props.dispatch('item.load', props.item)
-            const player = videojs(this.getVideoId())
-            player.ready(()=>this.setState({player: player}))
-           })
+            const player = window.videojs(this.getVideoId())
+            player.ready(() => this.setState({player: player}))
+          })
         })
       })
     })
@@ -118,20 +109,17 @@ class VideoJSVideo extends React.Component {
 
   componentWillUnmount () {
     window.removeEventListener('resize', this.onResize)
-    if (this.state.player){
+    if (this.state.player) {
       this.state.player.dispose()
     }
   }
 
-  onResize () {this.updateSize()}
+  onResize () { this.updateSize() }
 
-  getVideoId () {return `reactbox-video-${this.props.item.index}`}
+  getVideoId () { return `reactbox-video-${this.props.item.index}` }
 
   getIframeStyle (item) {
-    const content = {width: 1280, height: 720}
-    const container = this.state.size
-    return container
-    return applyIf(this.props.vAlign, align, fit(content, container))
+    return this.state.size
   }
 
   render (props = this.props) {
@@ -151,8 +139,9 @@ class VideoJSVideo extends React.Component {
 }
 
 export default function Video (props) {
-  if (props.item.url.match(tests.mp4))
+  if (props.item.url.match(tests.mp4)) {
     return (<VideoJSVideo {...props} />)
-  else
+  } else {
     return (<IframeVideo {...props} />)
+  }
 }

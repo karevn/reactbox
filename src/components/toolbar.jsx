@@ -12,8 +12,9 @@ import ShareIcon from 'react-icons/md/share'
 
 const hasFullscreen = fullscreen.supports()
 
-function Tooltip (props) {return (
-  <span className="reactbox-tooltip">{props.children}</span>)}
+function Tooltip (props) {
+  return (<span className="reactbox-tooltip">{props.children}</span>)
+}
 
 export default class Toolbar extends React.Component {
   constructor (props) {
@@ -22,16 +23,16 @@ export default class Toolbar extends React.Component {
     this.onWindowClickWhenSharing = ::this.onWindowClickWhenSharing
   }
   componentWillUpdate (newProps, newState) {
-    if (newState.shareOpen && !this.state.shareOpen){
+    if (newState.shareOpen && !this.state.shareOpen) {
       window.addEventListener('click', this.onWindowClickWhenSharing, true)
     }
-    if (!newState.shareOpen && this.state.shareOpen){
+    if (!newState.shareOpen && this.state.shareOpen) {
       window.removeEventListener('click', this.onWindowClickWhenSharing, true)
     }
   }
 
   componentWillUnmount () {
-    if (this.state.shareOpen){
+    if (this.state.shareOpen) {
       window.removeEventListener('click', this.onWindowClickWhenSharing, true)
     }
   }
@@ -44,12 +45,17 @@ export default class Toolbar extends React.Component {
     const activeItem = props.items[props.activeIndex]
     return (
       <div className="reactbox-toolbar">
-        <a href="#" onClick={(e)=> {e.preventDefault(); props.dispatch('unmount');}}
+        <a href="#"
+          onClick={e => { e.preventDefault(); props.dispatch('unmount') }}
           className="reactbox-toolbar-close reactbox-toolbar-link">
           <CloseIcon />
         </a>
         <If condition={hasFullscreen && !props.toolbar.isFullscreen}>
-          <a href="#" onClick={(e)=> {e.preventDefault(); props.dispatch('fullscreen.enter');}}
+          <a href="#"
+            onClick={ e => {
+              e.preventDefault()
+              props.dispatch('fullscreen.enter')
+            }}
             className="reactbox-toolbar-fullscreen reactbox-toolbar-link">
             <FullScreenIcon />
             <span className="reactbox-tooltip">
@@ -60,7 +66,10 @@ export default class Toolbar extends React.Component {
         <If condition={hasFullscreen && props.toolbar.isFullscreen}>
           <a href="#"
             className="reactbox-toolbar-link reactbox-toolbar-exit-fullscreen"
-            onClick={(e)=> {e.preventDefault(); props.dispatch('fullscreen.exit');}}>
+            onClick={e => {
+              e.preventDefault()
+              props.dispatch('fullscreen.exit')
+            }}>
             <FullScreenExitIcon />
             <Tooltip>{props.i18n.toolbar.fullscreen.exit}</Tooltip>
           </a>
@@ -69,10 +78,11 @@ export default class Toolbar extends React.Component {
            props.toolbar.share}>
           <div className="reactbox-toolbar-link reactbox-toolbar-share">
             <ShareIcon
-              onClick={(e)=> {
-                e.preventDefault();
-                this.setState({'shareOpen': true});
-                props.dispatch('share.open'); }} />
+              onClick={e => {
+                e.preventDefault()
+                this.setState({'shareOpen': true})
+                props.dispatch('share.open')
+              }} />
             <Tooltip>{props.i18n.toolbar.share}</Tooltip>
             <If condition={props.toolbar.shareActive}>
               <ShareMenu dispatch={props.dispatch} open={this.state.shareOpen}

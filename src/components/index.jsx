@@ -6,7 +6,6 @@ import Toolbar from './toolbar'
 import Lightbox from './lightbox'
 import Carousel from './carousel'
 
-
 import {getCarousel as getCarouselOptions} from '../options'
 
 export default class Reactbox extends React.Component {
@@ -37,6 +36,3 @@ export default class Reactbox extends React.Component {
     )
   }
 }
-
-
-

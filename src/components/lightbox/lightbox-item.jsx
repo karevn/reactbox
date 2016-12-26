@@ -25,7 +25,7 @@ export default class LightboxItem extends React.Component {
   calcStyle () {
     const props = this.props
     let offset = {x: 0, y: 0}
-    if (props.touch && props.touch.offset){
+    if (props.touch && props.touch.offset) {
       offset = props.touch.offset
     }
     if (props.metrics && props.item.index === props.activeIndex) {
@@ -33,17 +33,17 @@ export default class LightboxItem extends React.Component {
         transform: `translate(${offset.x}px, 0)`,
         left: 0,
         top: 0,
-        width: props.metrics.width + "px",
-        height: props.metrics.height + "px",
+        width: props.metrics.width + 'px',
+        height: props.metrics.height + 'px'
       }
     }
-    if (props.metrics && props.item.index < props.activeIndex){
-      return  {
+    if (props.metrics && props.item.index < props.activeIndex) {
+      return {
         left: 0,
-        transform: `translate(${(- this.props.metrics.width + offset.x)}px, 0)`,
+        transform: `translate(${(-this.props.metrics.width + offset.x)}px, 0)`,
         top: 0,
-        width: props.metrics.width + "px",
-        height: props.metrics.height + "px",
+        width: props.metrics.width + 'px',
+        height: props.metrics.height + 'px'
       }
     }
     if (props.metrics && props.item.index > props.activeIndex) {
@@ -51,8 +51,8 @@ export default class LightboxItem extends React.Component {
         left: 0,
         transform: `translate(${props.metrics.width + offset.x}px, 0)`,
         top: 0,
-        width: props.metrics.width + "px",
-        height: props.metrics.height + "px",
+        width: props.metrics.width + 'px',
+        height: props.metrics.height + 'px'
       }
     }
   }
@@ -77,16 +77,17 @@ export default class LightboxItem extends React.Component {
       animated: Math.abs(props.activeIndex - this.props.activeIndex) < 2 })
   }
   getContentStyle () {
-    if (!this.refs.content)
+    if (!this.refs.content) {
       return null
+    }
     const offset = getCarousel(this.props) ? 130 : 24
-    if (this.state.contentSize && getStyle(this.props.item) == 'bottom' &&
+    if (this.state.contentSize && getStyle(this.props.item) === 'bottom' &&
       this.refs.content.offsetHeight < this.state.size.height - offset) {
       return { top: (this.state.size.height - offset + 54 -
         this.refs.content.offsetHeight) / 2 }
     }
   }
-  onResize (size){ this.setState({contentSize: size}) }
+  onResize (size) { this.setState({contentSize: size}) }
   render (props = this.props) {
     const descriptionStyle = getStyle(this.props.item)
     const type = getContentType(this.props.item)
@@ -96,18 +97,18 @@ export default class LightboxItem extends React.Component {
         `reactbox-description-${descriptionStyle}`,
         `reactbox-content-${type}`,
         {
-          'reactbox-lightbox-active': this.props.item.index == this.props.activeIndex,
-          'reactbox-lightbox-next': this.props.item.index == this.props.activeIndex + 1,
-          'reactbox-lightbox-prev': this.props.item.index == this.props.activeIndex - 1,
+          'reactbox-lightbox-active': this.props.item.index === this.props.activeIndex,
+          'reactbox-lightbox-next': this.props.item.index === this.props.activeIndex + 1,
+          'reactbox-lightbox-prev': this.props.item.index === this.props.activeIndex - 1,
           'reactbox-loaded': this.props.item.loaded,
-          'reactbox-animated': this.state.animated,
+          'reactbox-animated': this.state.animated
         })} style={style}>
         <div className="reactbox-lightbox-item-content"
           style={this.getContentStyle()}
           ref="content">
           {React.createElement(content[type], Object.assign({}, props,
             {onResize: this.onResize}))}
-          <If condition={descriptionStyle != 'none'}>
+          <If condition={descriptionStyle !== 'none'}>
             <Description {...props} /></If>
         </div>
         <If condition={!props.item.loaded}><Loading {...props} /></If>
@@ -116,6 +117,4 @@ export default class LightboxItem extends React.Component {
   }
 
 }
-
-
 

@@ -24,7 +24,8 @@ export default class Iframe extends React.Component {
   }
 
   componentWillUnmount () {
-    window.removeEventListener('resize', this.updateSize) }
+    window.removeEventListener('resize', this.updateSize)
+  }
 
   render (props = this.props) {
     return (
@@ -32,7 +33,7 @@ export default class Iframe extends React.Component {
         'reactbox-object-iframe', props.className)}>
         <iframe src={props.src}
           style={pixels(this.state.size)}
-          onLoad={()=> props.dispatch('item.load', props.item)} />
+          onLoad={() => props.dispatch('item.load', props.item)} />
       </div>
     )
   }

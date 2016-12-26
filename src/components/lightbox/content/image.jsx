@@ -2,7 +2,6 @@ import './image.sass'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import classnames from 'classnames'
 import getStyle from '../style'
 import {fit, fill, align} from './resize'
 import {pixels} from '../../../css'
@@ -27,9 +26,10 @@ export default class Image extends React.Component {
   }
 
   getImageStyle () {
-    if (!this.props.item.size || this.state.height == 0)
+    if (!this.props.item.size || this.state.height === 0) {
       return
-    if (['none', 'mini'].includes(getStyle(this.props.item))){
+    }
+    if (['none', 'mini'].includes(getStyle(this.props.item))) {
       return fit(this.state, this.props.item.size)
     }
     return fill(this.state, this.props.item.size)
@@ -41,7 +41,7 @@ export default class Image extends React.Component {
       <img className="reactbox-lightbox-content-image"
         style={pixels(align(this.state, this.getImageStyle()))}
         src={props.item.url}
-        onLoad={(event)=> {
+        onLoad={event => {
           props.item.size = {
             width: event.target.naturalWidth,
             height: event.target.naturalHeight

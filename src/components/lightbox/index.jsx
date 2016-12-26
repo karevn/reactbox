@@ -34,7 +34,6 @@ export default class Lightbox extends React.Component {
     })
   }
   render () {
-    const _this = this
     const props = this.props
     const items = [props.items[props.activeIndex]]
     if (props.activeIndex > 0) {
@@ -43,24 +42,29 @@ export default class Lightbox extends React.Component {
     if (props.activeIndex < props.items.length - 1) {
       items.push(props.items[props.activeIndex + 1])
     }
+    const classes = classnames(['reactbox-next',
+      {'reactbox-disabled': props.activeIndex >= props.items.length - 1}])
     return (
       <div className="reactbox-lightbox">
         <If condition={this.props.items.length > 1}>
           <div className={classnames(['reactbox-prev'],
-            {'reactbox-disabled': this.props.activeIndex == 0})}
-            onClick={ ()=> {props.dispatch('prev')}}>
+            {'reactbox-disabled': this.props.activeIndex === 0})}
+            onClick={() => { props.dispatch('prev') }}>
             <LeftIcon size={100}/>
           </div>
         </If>
         <If condition={props.items.length > 1}>
-          <div className={classnames(['reactbox-next', {
-            'reactbox-disabled': props.activeIndex >= props.items.length - 1
-            }])} onClick={ () => {props.dispatch('next')}}>
+          <div className={classes}
+            onClick={() => { props.dispatch('next') }}>
             <RightIcon size={100}/>
           </div>
         </If>
         <If condition={this.state.metrics}>
-            {items.map((item)=> {return (<Item {...props} item={item} metrics={this.state.metrics} key={item.index} />)})}
+            {items.map(item => {
+              return (
+                <Item {...props} item={item} metrics={this.state.metrics}
+                  key={item.index} />)
+            })}
         </If>
       </div>
     )
