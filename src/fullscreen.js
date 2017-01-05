@@ -1,9 +1,11 @@
+import find from 'array.prototype.find'
+
 let prefix = prop => ['moz', 'ms', 'webkit'].map(prefix => `${prefix}${prop}`)
 export default {
   supports() {
     let el = document.documentElement
     if (el.requestFullscreen) { return true }
-    return !!Array.find(prefix('RequestFullScreen'), prefixed => !!el[prefixed])
+    return !!find(prefix('RequestFullScreen'), prefixed => !!el[prefixed])
   },
   is() {
     for (let method of ['fullscreenEnabled', 'webkitFullscreenEnabled',
