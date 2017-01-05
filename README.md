@@ -1,16 +1,14 @@
 # Reactbox - React.js lightbox
 
 Every ecosystem needs its own lightbox, right? So does React.js.
-For demo, see [demo](http://reactbox.karevn.com/demo).
 
 ## Main features:
 * Nice minimal UI.
 * Based on React.js and Flux idioms.
 * Can be used in a non-react environment.
-* Lots of item types
-* 3 item layout supported (see [demo](http://reactbox.karevn.com/demo))
-* Does not require jQuery, undrscore or similar libs.
-* Does not depend on specific HTML structure.
+* Lots of item types.
+* 3 item layout supported (see [demo](http://reactbox.karevn.com/demo)).
+* No dependencies.
 * Clean API - provides a simple one-function API, plus a React component.
 * Responsive and mobile friendly.
 * Supports swiping.
@@ -25,7 +23,7 @@ For demo, see [demo](http://reactbox.karevn.com/demo).
 * AJAX content.
 * HTML content.
 
-All these item types come with a number of lightbox layout options - see [demo](http://reactbox.karevn.com/demo).
+All these item types come with a number of lightbox layout options.
 
 ## Installation
 You can install Reactbox from npm with one command:
@@ -34,23 +32,18 @@ You can install Reactbox from npm with one command:
 npm install --save reactbox
 ```
 
-## Non-react usage
-You can call `window.reactbox.attach()` to initialize Reactbox for your image
-and video links. Or, you can use its API to open the lightbox in more complex
-scenarios:
+or
+
+```
+yarn add reactbox
+```
+
+## Usage
 
 ```js
-window.reactbox(options)
-```
-will open Reactbox with the options specified (see options docs below).
+import reactbox from 'reactbox'
 
-## React usage
-
-```jsx
-import Reactbox = from 'reactbox'
-...
-<Reactbox items={items} carousel={true} />
-
+reactbox(items)
 ```
 This will open Reactbox in your application, passing it `items` as an option.
 
@@ -65,7 +58,7 @@ If the thumbnail carousel below the mainbox will be displayed. Carousel is only 
 Example:
 
 ```js
-window.reactbox({
+reactbox({
   items: [...],
   carousel: false
 })
@@ -118,7 +111,7 @@ Default:
 Example:
 ```js
 // Will only show Facebook for sharing
-window.reactbox({
+reactbox({
   items: [...],
   share: {
     facebook: {
@@ -137,7 +130,7 @@ Default: `null`
 
 Example:
 ```js
-window.reactbox({
+reactbox({
   items: [{url: 'http:/example.com/img/image.jpg'}]
 })
 ```
