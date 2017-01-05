@@ -3,10 +3,7 @@ export default {
   supports() {
     let el = document.documentElement
     if (el.requestFullscreen) { return true }
-    for (let prefixed of prefix('RequestFullScreen')) {
-      if (el[prefixed]) { return true }
-    }
-    return false
+    return !!prefix('RequestFullScreen').find(prefixed => !!el[prefixed])
   },
   is() {
     for (let method of ['fullscreenEnabled', 'webkitFullscreenEnabled',
