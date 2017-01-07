@@ -91,7 +91,7 @@ export default class LightboxItem extends React.Component {
   render (props = this.props) {
     const descriptionStyle = getStyle(this.props.item)
     const type = getContentType(this.props.item)
-    const style = css.camelize(css.prefix(this.calcStyle()))
+    const style = css.prefix(this.calcStyle())
     return (
       <div className={classnames('reactbox-lightbox-item',
         `reactbox-description-${descriptionStyle}`,

@@ -43,8 +43,8 @@ class Item extends React.Component {
     this.props.item.thumbnailLoaded = false
   }
   render (props = this.props) {
-    const imageStyle = css.camelize(
-      css.prefix({transform: `translate(${props.left}px, 0)`}))
+    const imageStyle =
+      css.prefix({transform: `translate(${props.left}px, 0)`})
     const classes = classnames('reactbox-carousel-item', {
       'reactbox-active': props.item.index === props.activeIndex,
       'reactbox-loaded': props.item.thumbnailLoaded || props.item.thumbnailError,

@@ -1,7 +1,7 @@
 import camelcase from 'uppercamelcase'
 import includes from 'lodash/includes'
 
-const defaultPrefixes = ['moz', 'webkit', 'o', 'ms']
+const defaultPrefixes = ['Moz', 'Webkit', 'O', 'MS']
 const prefixedKeys = {
   'transform': defaultPrefixes,
   'border-radius': defaultPrefixes,
@@ -22,6 +22,9 @@ function mapObject(object, callback) {
     return result
   }, {})
 }
+function capitalize(str) {
+  return str[0].toUpperCase() + str.substr(1)
+}
 function concatWith(suffix) { return function(str) { return str + suffix } }
 export function pixels(style) { return mapObject(style, concatWith('px')) }
 export default {
@@ -30,7 +33,7 @@ export default {
       let prefixes = prefixedKeys[key]
       if (prefixes) {
         result = prefixes.reduce(function(result, prefix) {
-          result[camelcase(prefix + '-' + key)] = styles[key]
+          result[prefix + capitalize(camelcase(key))] = styles[key]
           return result
         }
         , result)
