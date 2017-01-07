@@ -3,6 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Iframe from './iframe'
 import getStyle from '../style'
+import find from 'lodash/find'
 
 function load(tag, id, srcAttr, srcVal, attr) {
   return new Promise((resolve, reject) => {
@@ -56,7 +57,7 @@ const formatters = {
 
 function getSrc (item) {
   const url = item.url
-  const service = Object.keys(tests).find(key => url.match(tests[key]))
+  const service = find(Object.keys(tests), key => url.match(tests[key]))
   const id = extractors[service](url)
   return formatters[service](id)
 }

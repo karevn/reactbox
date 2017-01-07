@@ -1,4 +1,6 @@
 import camelcase from 'uppercamelcase'
+import includes from 'lodash/includes'
+
 const defaultPrefixes = ['moz', 'webkit', 'o', 'ms']
 const prefixedKeys = {
   'transform': defaultPrefixes,
@@ -40,7 +42,7 @@ export default {
   },
   camelize(styles) {
     return Object.keys(styles).reduce(function(result, key) {
-      if (Object.keys(prefixedKeys).includes(key)) {
+      if (includes(Object.keys(prefixedKeys),key)) {
         result[camelcase(key)] = styles[key]
       } else {
         result[key] = styles[key]

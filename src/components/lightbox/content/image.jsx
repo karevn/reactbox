@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom'
 import getStyle from '../style'
 import {fit, fill, align} from './resize'
 import {pixels} from '../../../css'
+import includes from 'lodash/includes'
 
 export default class Image extends React.Component {
   constructor (props) {
@@ -29,7 +30,7 @@ export default class Image extends React.Component {
     if (!this.props.item.size || this.state.height === 0) {
       return
     }
-    if (['none', 'mini'].includes(getStyle(this.props.item))) {
+    if (includes(['none', 'mini'], getStyle(this.props.item))) {
       return fit(this.state, this.props.item.size)
     }
     return fill(this.state, this.props.item.size)
