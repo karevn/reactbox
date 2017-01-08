@@ -7,6 +7,11 @@ import classnames from 'classnames'
 import CloseIcon from 'react-icons/md/close'
 
 import css from '../css'
+import find from 'lodash/find'
+import property from 'lodash/property'
+function differs(a, b, props) {
+  return find(props, (prop) => property(prop)(a) !== property(prop)(b))
+}
 
 class Item extends React.Component {
   constructor (props) {
@@ -41,6 +46,18 @@ class Item extends React.Component {
   }
   componentWillUnmount () {
     this.props.item.thumbnailLoaded = false
+  }
+  shouldComponentUpdate (newProps, newState) {
+    if (this.state &&
+      differs(newState, this.state, ['width', 'height', 'animated'])) {
+      return true
+    }
+
+    if (differs(newProps,
+      this.props, ['left', 'item', 'item.thumbnail', 'item.error'])) {
+      return true
+    }
+    return false
   }
   render (props = this.props) {
     const imageStyle =
