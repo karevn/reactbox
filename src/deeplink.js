@@ -1,5 +1,12 @@
 /* global location */
 let hash = null
+function clearHash() {
+  if ( window.history && window.history.pushState ) {
+      window.history.pushState('', '', window.location.pathname)
+  } else {
+      window.location.href = window.location.href.replace(/#.*$/, '#');
+  }
+}
 export default {
   init() {
     if (location.hash) {
@@ -20,7 +27,7 @@ export default {
       if (hash) {
         location.hash = hash
       } else {
-        location.hash = ''
+        clearHash()
       }
     } catch (error) {}
     hash = null
