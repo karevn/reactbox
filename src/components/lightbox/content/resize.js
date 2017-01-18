@@ -1,5 +1,9 @@
 function aspect(thing) { return thing.width / thing.height }
 
+function fits(a, b) {
+  return a.width > b.width && a.height > b.height
+}
+
 function resize(container, content, decision) {
   if (decision(aspect(container), aspect(content))) {
     return fitWidth(container, content)
@@ -50,6 +54,9 @@ export function align(container, size) {
 }
 
 export function fit (container, content) {
+  if (fits(container, content)) {
+    return content
+  }
   return resize(container, content, (container, content) => container < content)
 }
 
