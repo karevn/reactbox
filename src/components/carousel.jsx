@@ -7,7 +7,7 @@ import classnames from 'classnames'
 import CloseIcon from 'react-icons/md/close'
 
 import css from '../css'
-import find from 'lodash/find'
+import find from 'array.prototype.find'
 import property from 'lodash/property'
 function differs(a, b, props) {
   return find(props, (prop) => property(prop)(a) !== property(prop)(b))

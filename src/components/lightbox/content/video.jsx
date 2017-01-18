@@ -3,7 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Iframe from './iframe'
 import getStyle from '../style'
-import find from 'lodash/find'
+import find from 'array.prototype.find'
 
 function load(tag, id, srcAttr, srcVal, attr) {
   return new Promise((resolve, reject) => {
