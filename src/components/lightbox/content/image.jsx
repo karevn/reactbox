@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 import getStyle from '../style'
 import {fit, fill, align} from './resize'
 import {pixels} from '../../../css'
-import includes from 'lodash/includes'
+import includes from '../../../includes'
 
 export default class Image extends React.Component {
   constructor (props) {

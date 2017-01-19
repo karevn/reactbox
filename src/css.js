@@ -1,5 +1,5 @@
 import camelcase from 'uppercamelcase'
-import includes from 'lodash/includes'
+import includes from './includes'
 
 const defaultPrefixes = ['Moz', 'Webkit', 'O', 'MS']
 const prefixedKeys = {

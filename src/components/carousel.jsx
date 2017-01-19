@@ -8,9 +8,10 @@ import CloseIcon from 'react-icons/md/close'
 
 import css from '../css'
 import find from 'array.prototype.find'
-import property from 'lodash/property'
+import {get as property} from 'dot-prop'
+
 function differs(a, b, props) {
-  return find(props, (prop) => property(prop)(a) !== property(prop)(b))
+  return find(props, (prop) => property(a, prop) !== property(b, prop))
 }
 
 class Item extends React.Component {
