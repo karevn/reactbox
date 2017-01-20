@@ -16,7 +16,6 @@ function differs(a, b, props) {
 class Item extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {animated: false}
     this.onImageMounted = ::this.onImageMounted
     this.onClick = ::this.onClick
     this.onError = ::this.onError
@@ -25,12 +24,10 @@ class Item extends React.Component {
   onLoad (e) {
     this.props.item.thumbnailSize = {width: e.target.naturalWidth,
       height: e.target.naturalHeight}
-    this.props.dispatch('item.thumbnail.load', this.props.item).then(() =>
-      this.setState({animated: true}))
+    this.props.dispatch('item.thumbnail.load', this.props.item)
   }
   onError (e) {
-    this.props.dispatch('item.thumbnail.error', this.props.item).then(() =>
-      this.setState({animated: true}))
+    this.props.dispatch('item.thumbnail.error', this.props.item)
   }
   onClick (e) {
     e.preventDefault()
@@ -47,18 +44,7 @@ class Item extends React.Component {
   componentWillUnmount () {
     this.props.item.thumbnailLoaded = false
   }
-  shouldComponentUpdate (newProps, newState) {
-    if (this.state &&
-      differs(newState, this.state, ['width', 'height', 'animated'])) {
-      return true
-    }
 
-    if (differs(newProps,
-      this.props, ['left', 'item', 'item.thumbnail', 'item.error'])) {
-      return true
-    }
-    return false
-  }
   render (props = this.props) {
     const imageStyle =
       css.prefix({transform: `translate(${props.left}px, 0)`})
@@ -66,7 +52,7 @@ class Item extends React.Component {
       'reactbox-active': props.item.index === props.activeIndex,
       'reactbox-loaded': props.item.thumbnailLoaded || props.item.thumbnailError,
       'reactbox-error': props.item.thumbnailError,
-      'reactbox-animated': this.state.animated
+      'reactbox-animated': props.item.thumbnailLoaded || props.item.thumbnailError
     })
     return (
       <div className={classes} onClick={this.onClick} style={imageStyle}>
