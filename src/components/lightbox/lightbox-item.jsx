@@ -12,6 +12,29 @@ import * as content from './content'
 import css from '../../css'
 import getStyle from './style'
 
+function getOffset(props) {
+  return props.touch && props.touch.offset ? props.touch.offset : {x: 0, y: 0}
+}
+function isActiveItem(item, props) {
+  return item.index === props.activeIndex }
+function isPreviousItem(item, props) {
+  return item.index < props.activeIndex }
+function isNextItem(item, props) {
+  return item.index > props.activeIndex }
+function getTransform (props) {
+  const item = props.item
+  const metrics = props.metrics
+  const offset = getOffset(props)
+  if (isActiveItem(props.item, props)) {
+    return `translate(${offset.x}px, 0)`
+  }
+  if (isPreviousItem(item, props)) {
+    return `translate(${(-metrics.width + offset.x)}px, 0)`
+  }
+  if (isNextItem(item, props)) {
+    return `translate(${metrics.width + offset.x}px, 0)`
+  }
+}
 export default class LightboxItem extends React.Component {
   constructor (props) {
     super(props)
@@ -22,38 +45,19 @@ export default class LightboxItem extends React.Component {
     }
     this.updateSize = ::this.updateSize
   }
+
   calcStyle () {
     const props = this.props
-    let offset = {x: 0, y: 0}
-    if (props.touch && props.touch.offset) {
-      offset = props.touch.offset
+    const metrics = props.metrics
+    if (!props.metrics) {
+      return null
     }
-    if (props.metrics && props.item.index === props.activeIndex) {
-      return {
-        transform: `translate(${offset.x}px, 0)`,
-        left: 0,
-        top: 0,
-        width: props.metrics.width + 'px',
-        height: props.metrics.height + 'px'
-      }
-    }
-    if (props.metrics && props.item.index < props.activeIndex) {
-      return {
-        left: 0,
-        transform: `translate(${(-this.props.metrics.width + offset.x)}px, 0)`,
-        top: 0,
-        width: props.metrics.width + 'px',
-        height: props.metrics.height + 'px'
-      }
-    }
-    if (props.metrics && props.item.index > props.activeIndex) {
-      return {
-        left: 0,
-        transform: `translate(${props.metrics.width + offset.x}px, 0)`,
-        top: 0,
-        width: props.metrics.width + 'px',
-        height: props.metrics.height + 'px'
-      }
+    return {
+      transform: getTransform(props),
+      left: 0,
+      top: 0,
+      width: metrics.width + 'px',
+      height: metrics.height + 'px'
     }
   }
   componentDidMount () {
@@ -89,18 +93,19 @@ export default class LightboxItem extends React.Component {
   }
   onResize (size) { this.setState({contentSize: size}) }
   render (props = this.props) {
-    const descriptionStyle = getStyle(this.props.item)
-    const type = getContentType(this.props.item)
+    const item = props.item
+    const descriptionStyle = getStyle(item)
+    const type = getContentType(item)
     const style = css.prefix(this.calcStyle())
     return (
       <div className={classnames('reactbox-lightbox-item',
         `reactbox-description-${descriptionStyle}`,
         `reactbox-content-${type}`,
         {
-          'reactbox-lightbox-active': this.props.item.index === this.props.activeIndex,
-          'reactbox-lightbox-next': this.props.item.index === this.props.activeIndex + 1,
-          'reactbox-lightbox-prev': this.props.item.index === this.props.activeIndex - 1,
-          'reactbox-loaded': this.props.item.loaded,
+          'reactbox-lightbox-active': isActiveItem(item, props),
+          'reactbox-lightbox-next': isNextItem(item, props),
+          'reactbox-lightbox-prev': isPreviousItem(item, props),
+          'reactbox-loaded': item.loaded,
           'reactbox-animated': this.state.animated
         })} style={style}>
         <div className="reactbox-lightbox-item-content"
@@ -111,7 +116,7 @@ export default class LightboxItem extends React.Component {
           <If condition={descriptionStyle !== 'none'}>
             <Description {...props} /></If>
         </div>
-        <If condition={!props.item.loaded}><Loading {...props} /></If>
+        <If condition={!item.loaded}><Loading {...props} /></If>
       </div>
     )
   }
