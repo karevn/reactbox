@@ -67,7 +67,7 @@ export default class Lightbox extends React.Component {
         <If condition={!!metrics}>
           <For each="item" of={items}>
             <Item {...props} item={item} metrics={metrics}
-              key={item.index} />)
+              key={item.index} />
           </For>
         </If>
       </div>
