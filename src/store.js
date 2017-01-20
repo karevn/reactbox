@@ -75,5 +75,8 @@ export default {
   'fullscreen.exit': function(state) {
     fullscreen.exit()
     state.toolbar.isFullscreen = false
+  },
+  'carousel.resize': function(state, size) {
+    state.carousel = size
   }
 }

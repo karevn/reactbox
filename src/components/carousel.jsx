@@ -71,7 +71,6 @@ class Item extends React.Component {
 export default class Carousel extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {width: 0, height: 0}
     this.onWindowResize = ::this.onWindowResize
   }
   getWidth (item) {
@@ -81,7 +80,7 @@ export default class Carousel extends React.Component {
     if (!item.thumbnailSize) {
       return 0
     }
-    return this.state.height *
+    return this.props.carousel.height *
       item.thumbnailSize.width / item.thumbnailSize.height
   }
   getLeftForActive () {
@@ -98,13 +97,10 @@ export default class Carousel extends React.Component {
   onWindowResize () { this.updateSize() }
   updateSize () {
     const node = this.refs.carousel
-    this.setState({
-      height: node.clientHeight,
-      width: node.clientWidth
-    })
+    this.props.dispatch('carousel.resize',
+      {width: node.clientWidth, height: node.clientHeight})
   }
   render (props = this.props) {
-    const state = this.state
     const current = props.items[props.activeIndex]
     let left = this.getLeftForActive()
     const visible = [{item: current, left: left}]
@@ -135,7 +131,7 @@ export default class Carousel extends React.Component {
     }
     return (
       <div className="reactbox-carousel" ref="carousel">
-        <If condition={state.width && state.height}>
+        <If condition={props.carousel}>
           <For each="item" of={visible}>
             <Item {...props} item={item.item} key={item.item.index}
               left={item.left}/>
