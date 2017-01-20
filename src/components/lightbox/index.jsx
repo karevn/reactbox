@@ -35,6 +35,7 @@ export default class Lightbox extends React.Component {
   }
   render () {
     const props = this.props
+    const metrics = this.state.metrics
     const items = [props.items[props.activeIndex]]
     if (props.activeIndex > 0) {
       items.unshift(props.items[props.activeIndex - 1])
@@ -42,29 +43,29 @@ export default class Lightbox extends React.Component {
     if (props.activeIndex < props.items.length - 1) {
       items.push(props.items[props.activeIndex + 1])
     }
-    const classes = classnames(['reactbox-next',
+    const prevClasses = classnames(['reactbox-prev'],
+      {'reactbox-disabled': this.props.activeIndex === 0})
+    const nextClasses = classnames(['reactbox-next',
       {'reactbox-disabled': props.activeIndex >= props.items.length - 1}])
     return (
       <div className="reactbox-lightbox">
-        <If condition={this.props.items.length > 1}>
-          <div className={classnames(['reactbox-prev'],
-            {'reactbox-disabled': this.props.activeIndex === 0})}
-            onClick={() => { props.dispatch('prev') }}>
+        <If condition={props.items.length > 1}>
+          <div className={prevClasses}
+            onClick={() => props.dispatch('prev')}>
             <LeftIcon size={100}/>
           </div>
         </If>
         <If condition={props.items.length > 1}>
-          <div className={classes}
-            onClick={() => { props.dispatch('next') }}>
+          <div className={nextClasses}
+            onClick={() => props.dispatch('next')}>
             <RightIcon size={100}/>
           </div>
         </If>
-        <If condition={this.state.metrics}>
-            {items.map(item => {
-              return (
-                <Item {...props} item={item} metrics={this.state.metrics}
-                  key={item.index} />)
-            })}
+        <If condition={!!metrics}>
+          <For each="item" of={items}>
+            <Item {...props} item={item} metrics={metrics}
+              key={item.index} />)
+          </For>
         </If>
       </div>
     )
