@@ -14,14 +14,16 @@ export default class Lightbox extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
+    this.calcMetrics = ::this.calcMetrics
   }
   componentDidMount () {
-    window.addEventListener('resize', ::this.calcMetrics)
+    window.addEventListener('resize', this.calcMetrics)
     this.calcMetrics()
   }
   componentWillUnmount () {
-    window.removeEventListener('resize', ::this.calcMetrics)
+    window.removeEventListener('resize', this.calcMetrics)
   }
+
   calcMetrics () {
     const node = ReactDOM.findDOMNode(this)
     this.setState({
@@ -33,6 +35,7 @@ export default class Lightbox extends React.Component {
       }
     })
   }
+
   render () {
     const props = this.props
     const metrics = this.state.metrics
