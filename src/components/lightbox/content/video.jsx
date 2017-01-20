@@ -1,6 +1,7 @@
 import './video.sass'
+
 import React from 'react'
-import ReactDOM from 'react-dom'
+
 import Iframe from './iframe'
 import getStyle from '../style'
 import find from 'array.prototype.find'
@@ -99,7 +100,7 @@ class VideoJSVideo extends React.Component {
   }
 
   updateSize (callback) {
-    const node = ReactDOM.findDOMNode(this).parentElement
+    const node = this.refs.this.parentElement
     this.setState({
       size: {
         width: node.clientWidth,
@@ -127,7 +128,7 @@ class VideoJSVideo extends React.Component {
     const item = props.item
     const iframeStyle = this.getIframeStyle(item)
     return (
-      <div className="video-js-wrapper" style={iframeStyle}>
+      <div className="video-js-wrapper" style={iframeStyle} ref="this">
         <video id={this.getVideoId()} controls preload="auto"
           poster={item.thumbnail}
           style={{width: '100%', height: '100%'}}

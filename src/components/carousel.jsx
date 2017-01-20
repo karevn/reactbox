@@ -1,7 +1,6 @@
 import './carousel.sass'
 
 import React from 'react'
-import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 
 import CloseIcon from 'react-icons/md/close'
@@ -112,13 +111,14 @@ export default class Carousel extends React.Component {
   }
   onWindowResize () { this.updateSize() }
   updateSize () {
-    const node = ReactDOM.findDOMNode(this)
+    const node = this.refs.carousel
     this.setState({
       height: node.clientHeight,
       width: node.clientWidth
     })
   }
   render (props = this.props) {
+    const state = this.state
     const current = props.items[props.activeIndex]
     let left = this.getLeftForActive()
     const visible = [{item: current, left: left}]
@@ -148,12 +148,12 @@ export default class Carousel extends React.Component {
       }
     }
     return (
-      <div className="reactbox-carousel">
-        <If condition={this.state.width && this.state.height}>
-            {visible.map(item => {
-              return (<Item {...props} item={item.item} key={item.item.index}
-                left={item.left}/>)
-            })}
+      <div className="reactbox-carousel" ref="carousel">
+        <If condition={state.width && state.height}>
+          <For each="item" of={visible}>
+            <Item {...props} item={item.item} key={item.item.index}
+              left={item.left}/>
+          </For>
         </If>
       </div>
     )

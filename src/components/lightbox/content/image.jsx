@@ -1,7 +1,7 @@
 import './image.sass'
 
 import React from 'react'
-import ReactDOM from 'react-dom'
+
 import getStyle from '../style'
 import {fit, fill, align} from './resize'
 import {pixels} from '../../../css'
@@ -19,7 +19,7 @@ export default class Image extends React.Component {
     window.addEventListener('resize', this.updateSize)
   }
   updateSize () {
-    const node = ReactDOM.findDOMNode(this)
+    const node = this.refs.this
     this.setState({width: node.clientWidth, height: node.clientHeight})
   }
   componentWillUnmount () {
@@ -38,19 +38,20 @@ export default class Image extends React.Component {
 
   render (props = this.props) {
     return (
-      <div className="reactbox-lightbox-item-object reactbox-object-image">
-      <img className="reactbox-lightbox-content-image"
-        style={pixels(align(this.state, this.getImageStyle()))}
-        src={props.item.url}
-        onLoad={event => {
-          props.item.size = {
-            width: event.target.naturalWidth,
-            height: event.target.naturalHeight
-          }
-          props.dispatch('item.load', props.item)
-        }}
-      />
-    </div>
+      <div className="reactbox-lightbox-item-object reactbox-object-image"
+        ref="this">
+        <img className="reactbox-lightbox-content-image"
+          style={pixels(align(this.state, this.getImageStyle()))}
+          src={props.item.url}
+          onLoad={event => {
+            props.item.size = {
+              width: event.target.naturalWidth,
+              height: event.target.naturalHeight
+            }
+            props.dispatch('item.load', props.item)
+          }}
+        />
+      </div>
     )
   }
 }

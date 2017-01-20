@@ -1,7 +1,6 @@
 import './iframe.sass'
 
 import React from 'react'
-import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 
 import {pixels} from '../../../css'
@@ -19,7 +18,7 @@ export default class Iframe extends React.Component {
   }
 
   updateSize () {
-    const node = ReactDOM.findDOMNode(this)
+    const node = this.refs.this
     this.setState({size: {width: node.clientWidth, height: node.clientHeight}})
   }
 
@@ -30,7 +29,7 @@ export default class Iframe extends React.Component {
   render (props = this.props) {
     return (
       <div className={classnames('reactbox-lightbox-item-object',
-        'reactbox-object-iframe', props.className)}>
+        'reactbox-object-iframe', props.className)} ref="this">
         <iframe src={props.src}
           style={pixels(this.state.size)}
           onLoad={() => props.dispatch('item.load', props.item)} />

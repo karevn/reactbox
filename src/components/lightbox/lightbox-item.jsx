@@ -1,7 +1,6 @@
 import './lightbox-item.sass'
 
 import React from 'react'
-import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 
 import Loading from '../loading'
@@ -69,7 +68,7 @@ export default class LightboxItem extends React.Component {
     this.props.dispatch('item.unload', this.props.item)
   }
   updateSize () {
-    const node = ReactDOM.findDOMNode(this)
+    const node = this.refs.this
     this.setState({
       contentSize: { width: this.refs.content.offsetWidth,
         height: this.refs.content.offsetHeight},
@@ -107,7 +106,7 @@ export default class LightboxItem extends React.Component {
           'reactbox-lightbox-prev': isPreviousItem(item, props),
           'reactbox-loaded': item.loaded,
           'reactbox-animated': this.state.animated
-        })} style={style}>
+        })} style={style} ref="this">
         <div className="reactbox-lightbox-item-content"
           style={this.getContentStyle()}
           ref="content">

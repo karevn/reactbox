@@ -3,7 +3,6 @@ import './index.sass'
 import classnames from 'classnames'
 
 import React from 'react'
-import ReactDOM from 'react-dom'
 
 import Item from './lightbox-item'
 
@@ -25,7 +24,7 @@ export default class Lightbox extends React.Component {
   }
 
   calcMetrics () {
-    const node = ReactDOM.findDOMNode(this)
+    const node = this.refs.lightbox
     this.setState({
       metrics: {
         left: node.offsetLeft,
@@ -51,7 +50,7 @@ export default class Lightbox extends React.Component {
     const nextClasses = classnames(['reactbox-next',
       {'reactbox-disabled': props.activeIndex >= props.items.length - 1}])
     return (
-      <div className="reactbox-lightbox">
+      <div className="reactbox-lightbox" ref="lightbox">
         <If condition={props.items.length > 1}>
           <div className={prevClasses}
             onClick={() => props.dispatch('prev')}>
