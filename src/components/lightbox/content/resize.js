@@ -46,6 +46,9 @@ export function align(container, size) {
   if (!container || !size) {
     return null
   }
+  if (size.width < container.width && size.height < container.height) {
+    return valign(container, halign(container, size))
+  }
   if (size.width > container.width) {
     return valign(container, size)
   } else {
