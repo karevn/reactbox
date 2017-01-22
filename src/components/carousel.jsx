@@ -75,6 +75,41 @@ function getLeftForActive (props) {
     getItemWidth(props, props.items[props.activeIndex]) / 2
 }
 
+function visible(props) {
+  const items = props.items
+  const current = items[props.activeIndex]
+  let left = getLeftForActive(props)
+  const visible = [{item: current, left: left}]
+  const windowWidth = window.innerWidth
+
+  if (current.index < items.length - 1) {
+    for (let i = current.index + 1; i < items.length; i++) {
+      const item = items[i]
+      left = left + getItemWidth(props, items[i - 1]) + 12
+      visible.push({item: item, left: left})
+      if (!(item.thumbnailSize &&
+        (item.thumbnailLoaded || item.thumbnailError)) ||
+        item.left > windowWidth * 1.5) {
+        break
+      }
+    }
+  }
+  left = getLeftForActive(props)
+  if (current.index > 0 && (current.thumbnailLoaded ||
+    current.thumbnailError)) {
+    for (let i = current.index - 1; i >= 0; i--) {
+      const item = items[i]
+      left = left - (getItemWidth(props, items[i])) - 12
+      visible.unshift({item: item, left: left})
+      if (!(item.thumbnailSize && (item.thumbnailLoaded || item.thumbnailError)) ||
+        item.left < -(windowWidth + getItemWidth(props, item))) {
+        break
+      }
+    }
+  }
+  return visible
+}
+
 export default class Carousel extends React.Component {
   constructor (props) {
     super(props)
@@ -93,39 +128,10 @@ export default class Carousel extends React.Component {
       {width: node.clientWidth, height: node.clientHeight})
   }
   render (props = this.props) {
-    const current = props.items[props.activeIndex]
-    let left = getLeftForActive(props)
-    const visible = [{item: current, left: left}]
-    const windowWidth = window.innerWidth
-    if (current.index < props.items.length - 1) {
-      for (let i = current.index + 1; i < props.items.length; i++) {
-        const item = props.items[i]
-        left = left + getItemWidth(props, props.items[i - 1]) + 12
-        visible.push({item: item, left: left})
-        if (!(item.thumbnailSize &&
-          (item.thumbnailLoaded || item.thumbnailError)) ||
-          item.left > windowWidth * 1.5) {
-          break
-        }
-      }
-    }
-    left = getLeftForActive(props)
-    if (current.index > 0 && (current.thumbnailLoaded ||
-      current.thumbnailError)) {
-      for (let i = current.index - 1; i >= 0; i--) {
-        const item = props.items[i]
-        left = left - (getItemWidth(props, props.items[i])) - 12
-        visible.unshift({item: item, left: left})
-        if (!(item.thumbnailSize && (item.thumbnailLoaded || item.thumbnailError)) ||
-          item.left < -(windowWidth + getItemWidth(props, item))) {
-          break
-        }
-      }
-    }
     return (
       <div className="reactbox-carousel" ref="carousel">
         <If condition={props.carousel}>
-          <For each="item" of={visible}>
+          <For each="item" of={visible(props)}>
             <Item {...props} item={item.item} key={item.item.index}
               left={item.left}/>
           </For>
