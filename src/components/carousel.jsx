@@ -70,56 +70,54 @@ function getItemWidth(props, item) {
     item.thumbnailSize.width / item.thumbnailSize.height
 }
 
-
+function getLeftForActive (props) {
+  return window.innerWidth / 2 -
+    getItemWidth(props, props.items[props.activeIndex]) / 2
+}
 
 export default class Carousel extends React.Component {
   constructor (props) {
     super(props)
     this.onWindowResize = ::this.onWindowResize
   }
-
-  getLeftForActive () {
-    return window.innerWidth / 2 -
-      getItemWidth(this.props, this.props.items[this.props.activeIndex]) / 2
-  }
   componentDidMount () {
-    this.updateSize()
+    this.onWindowResize()
     window.addEventListener('resize', this.onWindowResize)
   }
   componentWillUnmount () {
     window.removeEventListener('resize', this.onWindowResize)
   }
-  onWindowResize () { this.updateSize() }
-  updateSize () {
+  onWindowResize () {
     const node = this.refs.carousel
     this.props.dispatch('carousel.resize',
       {width: node.clientWidth, height: node.clientHeight})
   }
   render (props = this.props) {
     const current = props.items[props.activeIndex]
-    let left = this.getLeftForActive()
+    let left = getLeftForActive(props)
     const visible = [{item: current, left: left}]
-    if (current.index < this.props.items.length - 1) {
-      for (let i = current.index + 1; i < this.props.items.length; i++) {
+    const windowWidth = window.innerWidth
+    if (current.index < props.items.length - 1) {
+      for (let i = current.index + 1; i < props.items.length; i++) {
         const item = props.items[i]
         left = left + getItemWidth(props, props.items[i - 1]) + 12
         visible.push({item: item, left: left})
         if (!(item.thumbnailSize &&
           (item.thumbnailLoaded || item.thumbnailError)) ||
-          item.left > window.innerWidth * 1.5) {
+          item.left > windowWidth * 1.5) {
           break
         }
       }
     }
-    left = this.getLeftForActive()
+    left = getLeftForActive(props)
     if (current.index > 0 && (current.thumbnailLoaded ||
       current.thumbnailError)) {
       for (let i = current.index - 1; i >= 0; i--) {
-        const item = this.props.items[i]
-        left = left - (getItemWidth(props, this.props.items[i])) - 12
+        const item = props.items[i]
+        left = left - (getItemWidth(props, props.items[i])) - 12
         visible.unshift({item: item, left: left})
         if (!(item.thumbnailSize && (item.thumbnailLoaded || item.thumbnailError)) ||
-          item.left < -(window.innerWidth + getItemWidth(props, item))) {
+          item.left < -(windowWidth + getItemWidth(props, item))) {
           break
         }
       }
