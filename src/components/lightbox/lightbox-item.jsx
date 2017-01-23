@@ -37,11 +37,7 @@ function getTransform (props) {
 export default class LightboxItem extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      contentSize: {width: 0, height: 0},
-      loaded: false,
-      lastActiveIndex: props.activeIndex
-    }
+    this.state = {}
     this.updateSize = ::this.updateSize
   }
 
@@ -70,8 +66,6 @@ export default class LightboxItem extends React.Component {
   updateSize () {
     const node = this.refs.this
     this.setState({
-      contentSize: { width: this.refs.content.offsetWidth,
-        height: this.refs.content.offsetHeight},
       size: {width: node.clientWidth, height: node.clientHeight}
     })
   }
@@ -84,13 +78,12 @@ export default class LightboxItem extends React.Component {
       return null
     }
     const offset = getCarousel(this.props) ? 130 : 24
-    if (this.state.contentSize && getStyle(this.props.item) === 'bottom' &&
+    if (getStyle(this.props.item) === 'bottom' &&
       this.refs.content.offsetHeight < this.state.size.height - offset) {
       return { top: (this.state.size.height - offset + 54 -
         this.refs.content.offsetHeight) / 2 }
     }
   }
-  onResize (size) { this.setState({contentSize: size}) }
   render (props = this.props) {
     const item = props.item
     const descriptionStyle = getStyle(item)
@@ -110,8 +103,7 @@ export default class LightboxItem extends React.Component {
         <div className="reactbox-lightbox-item-content"
           style={this.getContentStyle()}
           ref="content">
-          {React.createElement(content[type], Object.assign({}, props,
-            {onResize: this.onResize}))}
+          {React.createElement(content[type], props)}
           <If condition={descriptionStyle !== 'none'}>
             <Description {...props} /></If>
         </div>
