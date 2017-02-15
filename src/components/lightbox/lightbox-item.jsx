@@ -5,7 +5,7 @@ import classnames from 'classnames'
 
 import Loading from '../loading'
 import Description from './description'
-import {getContentType, getCarousel} from '../..//options'
+import {getContentType, getCarousel} from '../../options'
 
 import * as content from './content'
 import css from '../../css'
