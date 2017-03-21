@@ -1,28 +1,21 @@
-
+function pageToXY(touch) {return {x: touch.pageX, y: touch.pageY}}
 export default function(dispatch) {
   const onTouchStart = function(e) {
     if (e.target.closest(`.reactbox-toolbar-wrapper, .reactbox-prev, \
 .reactbox-next`)) {
       return
     }
-    const touch = e.touches[0]
-    return dispatch('touch.start', {x: touch.pageX, y: touch.pageY})
+    return dispatch('touch.start', pageToXY(e.touches[0]));
   }
   const onTouchEnd = function(e) {
     const original = e.changedTouches[0]
     if (original) {
-      return dispatch('touch.end', {
-        x: e.changedTouches[0].pageX,
-        y: e.changedTouches[0].pageY}
-      )
+      dispatch('touch.end', pageToXY(e.changedTouches[0]))
     }
   }
   const onTouchMove = function(e) {
     const touch = e.touches[0]
-    return dispatch('touch.move', {
-      x: touch.pageX,
-      y: touch.pageY
-    })
+    dispatch('touch.move', pageToXY(touch))
   }
 
   return {
