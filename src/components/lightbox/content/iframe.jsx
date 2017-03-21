@@ -4,6 +4,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import {pixels} from '../../../css'
+import asap from 'asap'
 
 export default class Iframe extends React.Component {
   constructor (props) {
@@ -13,7 +14,7 @@ export default class Iframe extends React.Component {
   }
 
   componentDidMount () {
-    this.updateSize()
+    asap(this.updateSize)
     window.addEventListener('resize', this.updateSize)
   }
 
@@ -32,7 +33,7 @@ export default class Iframe extends React.Component {
         'reactbox-object-iframe', props.className)} ref="this">
         <iframe src={props.src}
           style={pixels(this.state.size)}
-          onLoad={() => props.dispatch('item.load', props.item)} />
+          onLoad={() => {props.dispatch('item.load', props.item); this.updateSize()}} />
       </div>
     )
   }
