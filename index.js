@@ -31,18 +31,25 @@ export default function Reactbox (props) {
     function show(props) {
       const el = createWrapper(props)
       document.body.appendChild(el)
-      const unmount = props.onUnmount
-      options.onUnmount = component => {
-        if (unmount) {
-          unmount(component)
-        }
-        ReactDOM.unmountComponentAtNode(el)
-        el.remove()
-      }
+      const overflow = document.documentElement.style.overflow
+      document.documentElement.style.overflow = 'hidden'
       const state = options(props)
       const app = new App(state, [store], el, Lightbox)
       const keyboard = Keyboard(app.store.dispatch)
       const touch = Touch(app.store.dispatch)
+      const unmount = props.onUnmount
+      options.onUnmount = component => {
+        document.documentElement.style.overflow = overflow
+        keyboard.disable()
+        Deeplink.reset()
+        Fullscreen.exit()
+        touch.disable()
+        if (unmount) {
+          unmount(component)
+        }
+        ReactDOM.unmountComponentAtNode(el)
+        el.parentNode.removeChild(el)
+      }
       Deeplink.init()
       Deeplink.set(app.store.state.items[app.store.state.activeIndex])
       keyboard.enable()
@@ -52,10 +59,6 @@ export default function Reactbox (props) {
         if (action !== 'unmount') {
           return
         }
-        keyboard.disable()
-        Deeplink.reset()
-        Fullscreen.exit()
-        touch.disable()
         options.onUnmount()
         resolve(app.store.state.items[app.store.state.activeIndex])
       }
