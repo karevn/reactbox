@@ -6,6 +6,10 @@ import classnames from 'classnames'
 import {pixels} from '../../../css'
 import asap from 'asap'
 
+function maybeApply(obj, func) {
+  return func ? func(obj) : obj
+}
+
 export default class Iframe extends React.Component {
   constructor (props) {
     super(props)
@@ -28,11 +32,12 @@ export default class Iframe extends React.Component {
   }
 
   render (props = this.props) {
+    const style = pixels(maybeApply(this.state.size, props.resize))
     return (
       <div className={classnames('reactbox-lightbox-item-object',
         'reactbox-object-iframe', props.className)} ref="this">
         <iframe src={props.src}
-          style={pixels(this.state.size)}
+          style={style}
           onLoad={() => {props.dispatch('item.load', props.item); this.updateSize()}} />
       </div>
     )

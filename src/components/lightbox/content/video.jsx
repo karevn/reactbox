@@ -4,6 +4,7 @@ import React from 'react'
 
 import Iframe from './iframe'
 import getStyle from '../style'
+import {valign} from './resize'
 import find from 'array.prototype.find'
 
 function load(tag, id, srcAttr, srcVal, attr) {
@@ -62,11 +63,19 @@ function getSrc (item) {
   const id = extractors[service](url)
   return formatters[service](id)
 }
-
+function resize(size) {
+  const standard = size.width / 16 * 9
+  if (size.height > standard) {
+    const newSize = Object.assign({}, size, {height: standard})
+    return valign(size, newSize)
+  }
+  return size
+}
 function IframeVideo (props) {
   return (<Iframe {...props} src={getSrc(props.item)} full={false}
     className="reactbox-object-video"
     vAlign={getStyle(props.item) !== 'right'}
+    resize={resize}
     fitWidth={getStyle(props.item) === 'bottom'}/>)
 }
 function loadVideoJS (callback) {
