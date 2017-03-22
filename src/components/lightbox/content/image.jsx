@@ -3,7 +3,7 @@ import './image.sass'
 import React from 'react'
 
 import getStyle from '../style'
-import {fit, fill, align} from './resize'
+import {fit, fill, valign, align} from './resize'
 import {pixels} from '../../../css'
 import includes from '../../../includes'
 import curry from 'curry'
@@ -21,7 +21,7 @@ function getImageStyle (state, item) {
     return
   }
   if (includes(['none', 'mini'], getStyle(item))) {
-    return fit(state, item.size)
+    return valign(state, fit(state, item.size))
   }
   return fill(state, item.size)
 }
