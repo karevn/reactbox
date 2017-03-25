@@ -4,7 +4,6 @@ import React from 'react'
 import classnames from 'classnames'
 
 import {pixels} from '../../../css'
-import asap from 'asap'
 
 function maybeApply(obj, func) {
   return func ? func(obj) : obj
@@ -18,7 +17,7 @@ export default class Iframe extends React.Component {
   }
 
   componentDidMount () {
-    asap(this.updateSize)
+    this.updateSize()
     window.addEventListener('resize', this.updateSize)
   }
 

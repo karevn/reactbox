@@ -63,11 +63,14 @@ function getSrc (item) {
   const id = extractors[service](url)
   return formatters[service](id)
 }
-function resize(size) {
+function resize(size, style) {
+  if (style === 'bottom') {
+    return size
+  }
   const standard = size.width / 16 * 9
   if (size.height > standard) {
     const newSize = Object.assign({}, size, {height: standard})
-    return valign(size, newSize)
+    return style === 'right' ? newSize : valign(size, newSize)
   }
   return size
 }
@@ -75,7 +78,7 @@ function IframeVideo (props) {
   return (<Iframe {...props} src={getSrc(props.item)} full={false}
     className="reactbox-object-video"
     vAlign={getStyle(props.item) !== 'right'}
-    resize={resize}
+    resize={size => resize(size, getStyle(props.item)) }
     fitWidth={getStyle(props.item) === 'bottom'}/>)
 }
 function loadVideoJS (callback) {
