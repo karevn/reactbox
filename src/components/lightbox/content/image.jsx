@@ -7,6 +7,7 @@ import {fit, fill, valign, align} from './resize'
 import {pixels} from '../../../css'
 import includes from '../../../includes'
 import curry from 'curry'
+import asap from 'asap'
 
 const onItemLoad = curry(function onItemLoad(props, event) {
   props.item.size = {
@@ -35,6 +36,9 @@ export default class Image extends React.Component {
   componentDidMount () {
     this.updateSize()
     window.addEventListener('resize', this.updateSize)
+    if (!this.props.item.url) {
+      asap(onItemLoad(this.props))
+    }
   }
   updateSize () {
     const node = this.refs.this
@@ -50,11 +54,13 @@ export default class Image extends React.Component {
     return (
       <div className="reactbox-lightbox-item-object reactbox-object-image"
         ref="this">
-        <img className="reactbox-lightbox-content-image"
-          style={pixels(align(state, getImageStyle(state, item)))}
-          src={item.url}
-          onLoad={onItemLoad(props)}
-        />
+        <If condition={!!item.url}>
+          <img className="reactbox-lightbox-content-image"
+            style={pixels(align(state, getImageStyle(state, item)))}
+            src={item.url}
+            onLoad={onItemLoad(props)}
+          />
+        </If>
       </div>
     )
   }
