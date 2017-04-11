@@ -1,7 +1,7 @@
 {
   "name": "reactbox",
   "description": "Powerful React.js-based lightbox",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "author": "Nikolay Karev",
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "array.prototype.find": "^2.0.1",
+    "asap": "^2.0.5",
     "atomicjs": "^1.1.0",
     "classnames": "^2.2.5",
     "curry": "^1.2.0",
