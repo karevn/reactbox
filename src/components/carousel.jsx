@@ -38,6 +38,7 @@ function thumbnailTransform(props) {
   return {transform: translate(props.left, props.top)} }
 function translate(x, y) {
   return `translate(${x}px, ${y || 0}px)` }
+
 function Item (props) {
   const imageStyle = css.prefix(thumbnailTransform(props))
   const classes = classnames('reactbox-carousel-item', {
@@ -46,15 +47,17 @@ function Item (props) {
     'reactbox-error': props.item.thumbnailError,
     'reactbox-animated': props.item.thumbnailLoaded || props.item.thumbnailError
   })
+  const item = props.item
   return (
     <div className={classes} onClick={onClick(props)} style={imageStyle}>
-      <If condition={!props.item.error}>
-        <img src={props.item.thumbnail}
+      <If condition={!item.error}>
+        <img src={item.thumbnail}
           onLoad={onLoad(props)}
           onError={onError(props)}
+          alt={item.alt}
           />
       </If>
-      <If condition={props.item.error}><CloseIcon /></If>
+      <If condition={item.error}><CloseIcon /></If>
     </div>
   )
 }

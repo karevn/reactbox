@@ -58,6 +58,7 @@ export default class Image extends React.Component {
           <img className="reactbox-lightbox-content-image"
             style={pixels(align(state, getImageStyle(state, item)))}
             src={item.url}
+            alt={item.alt}
             onLoad={onItemLoad(props)}
           />
         </If>
