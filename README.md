@@ -168,6 +168,12 @@ Item description object:
 }
 ```
 ##### download
-default: `null`
+  default: `null`
 
-Item download URL. Enables the download link at the top of the lightbox window.
+  Item download URL. Enables the download link at the top of the lightbox window.
+
+##### alt
+  default: `null`
+
+  Item alt description to be added as alt tag to the thumbnails and main lightbox
+  image.
