@@ -1,6 +1,7 @@
 import './lightbox-item.sass'
 
 import React from 'react'
+import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 
 import Loading from '../loading'
@@ -58,10 +59,14 @@ export default class LightboxItem extends React.Component {
   componentDidMount () {
     this.updateSize()
     window.addEventListener('resize', this.updateSize)
+    const _ = jQuery || $
+    _(window).trigger('lightbox:item:add', ReactDOM.findDOMNode(this))
   }
   componentWillUnmount () {
     window.removeEventListener('resize', this.updateSize)
     this.props.dispatch('item.unload', this.props.item)
+    const _ = jQuery || $
+    _(window).trigger('lightbox:item:remove', ReactDOM.findDOMNode(this))
   }
   updateSize () {
     const node = this.refs.this
@@ -92,8 +97,7 @@ export default class LightboxItem extends React.Component {
     return (
       <div className={classnames('reactbox-lightbox-item',
         `reactbox-description-${descriptionStyle}`,
-        `reactbox-content-${type}`,
-        {
+        `reactbox-content-${type}`, {
           'reactbox-lightbox-active': isActiveItem(item, props),
           'reactbox-lightbox-next': isNextItem(item, props),
           'reactbox-lightbox-prev': isPreviousItem(item, props),
@@ -113,4 +117,3 @@ export default class LightboxItem extends React.Component {
   }
 
 }
-
