@@ -15,7 +15,7 @@ function propOrProps(prop, options) {
   }
   return options[prop + 's']
 }
-function thenable(obj) { return typeof obj.then === 'function' }
+function isThenable(obj) { return typeof obj.then === 'function' }
 function createWrapper(options) {
   const el = document.createElement('div')
   el.id = 'reactbox-wrapper'
@@ -63,7 +63,7 @@ export default function Reactbox (props) {
         resolve(app.store.state.items[app.store.state.activeIndex])
       }
     }
-    if (thenable(props)) {
+    if (isThenable(props)) {
       props.then(show)
     } else {
       show(props)
