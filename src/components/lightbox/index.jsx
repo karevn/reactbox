@@ -6,8 +6,8 @@ import React from 'react'
 
 import Item from './lightbox-item'
 
-import LeftIcon from 'react-icons/fa/angle-left'
-import RightIcon from 'react-icons/fa/angle-right'
+import LeftIcon from 'react-icons/md/arrow-back'
+import RightIcon from 'react-icons/md/arrow-forward'
 
 class Icons extends React.Component {
   shouldComponentUpdate (nextProps) {
