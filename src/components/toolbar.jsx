@@ -4,7 +4,7 @@ import React from 'react'
 import fullscreen from '../fullscreen'
 import ShareMenu from './share'
 
-import DownloadIcon from 'react-icons/md/attach-file'
+import DownloadIcon from 'react-icons/md/file-download'
 import CloseIcon from 'react-icons/md/close'
 import FullScreenIcon from 'react-icons/md/fullscreen'
 import FullScreenExitIcon from 'react-icons/md/fullscreen-exit'
