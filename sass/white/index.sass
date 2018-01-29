@@ -1,0 +1,41 @@
+@import './colors'
+div.reactbox.reactbox--theme-white
+  background: rgba($white-ish, 0.98)
+  color: $white-ish
+
+  .reactbox-carousel-item .reactbox-error
+    background: $white-ish-darker
+  div.reactbox-loading
+    border-color: #D0D0D0
+    border-left-color: $loading-border-left-color
+
+  .reactbox-share-menu
+    background: $dark-ish
+    &:after
+      border-bottom-color: $dark-ish
+    a:hover
+      background: $dark-ish-lighter
+
+  div.reactbox-toolbar
+    .reactbox-toolbar-link, a.reactbox-toolbar-link
+      color: $dark-ish
+    &.reactbox-toolbar-close
+      color: $dark-ish
+    &:hover
+      color: $dark-ish-darker
+
+  .reactbox-description-right, .reactbox-description-bottom
+    .reactbox-lightbox-item-content
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.15)
+  .reactbox-description-none .reactbox-lightbox-content-image
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.15)
+  .reactbox-tooltip
+    color: $white-ish
+    background: $dark-ish
+    &:after
+      border-bottom-color: $dark-ish
+  .reactbox-next, .reactbox-prev
+    color: $dark-ish
+
+  .reactbox-description-mini .reactbox-lightbox-item-description
+    color: $dark-ish

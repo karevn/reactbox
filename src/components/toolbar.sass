@@ -21,9 +21,7 @@ div.reactbox-toolbar
     padding: 0
     margin: 0 0 0 18px
     background: transparent
-    color: white
     text-decoration: none
-    color: #aaa
     line-height: 40px
     transition: color 0.3s
     cursor: pointer
@@ -36,12 +34,10 @@ div.reactbox-toolbar
       outline: none
     &.reactbox-toolbar-close
       opacity: 1
-      color: white
       font-size: 28px
     &.reactbox-toolbar-fullscreen, &.reactbox-toolbar-exit-fullscreen
       font-size: 28px
     &:hover
-      color: white
       outline: none
       .reactbox-tooltip
         opacity: 1
@@ -52,11 +48,9 @@ div.reactbox-toolbar
   font-size: 12px
   font-weight: 200
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif
-  color: white
   line-height: 18px
   transform: translate(-50%, 100%)
   opacity: 0
-  background: #333
   border-radius: 2px
   padding: 3px 9px
   transition: opacity 0.3s
@@ -66,7 +60,8 @@ div.reactbox-toolbar
     content: ''
     border-left: 3px solid transparent
     border-right: 3px solid transparent
-    border-bottom: 3px solid #333
+    border-bottom-width: 3px
+    border-bottom-style: solid
     position: absolute
     left: 50%
     margin-left: -3px
