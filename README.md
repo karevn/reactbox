@@ -122,6 +122,12 @@ reactbox({
 })
 ```
 
+### theme
+
+Color theme used. Valid values are `null`, `"black"` or `"white"`.
+
+Default: `"black"`
+
 ### items
 
 An array of the items you want to show in a lightbox. See below for the docs on the item description format.
