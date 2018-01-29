@@ -1,4 +1,3 @@
-import deepmerge from 'deepmerge'
 import i18n from '../src/i18n'
 import {services} from './share'
 
@@ -16,13 +15,15 @@ function guessType(url) {
 };
 
 export default function(options) {
-  options = deepmerge({
+  options = {
     services: services,
     toolbar: {share: true},
     i18n,
     activeIndex: 0,
-    carousel: true
-  }, options)
+    carousel: true,
+    theme: 'black',
+    ...options
+  }
   options.items.forEach(function(item, index) {
     item.index = index
     if (!item.type) {
