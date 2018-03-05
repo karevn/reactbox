@@ -14,11 +14,11 @@ export default {
     format: 'es'
   },
   external: [
-    'react-icons/fa/google-plus',
-    'react-icons/md/file-download',
-    'react-icons/md/fullscreen-exit',
-    'react-icons/md/arrow-back',
-    'react-icons/md/arrow-forward',
+    'react-icons/lib/fa/google-plus',
+    'react-icons/lib/md/file-download',
+    'react-icons/lib/md/fullscreen-exit',
+    'react-icons/lib/md/arrow-back',
+    'react-icons/lib/md/arrow-forward',
   ],
   plugins: [
     sass({

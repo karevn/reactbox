@@ -4,11 +4,11 @@ import React from 'react'
 import fullscreen from '../fullscreen'
 import ShareMenu from './share'
 
-import DownloadIcon from 'react-icons/md/file-download'
-import CloseIcon from 'react-icons/md/close'
-import FullScreenIcon from 'react-icons/md/fullscreen'
-import FullScreenExitIcon from 'react-icons/md/fullscreen-exit'
-import ShareIcon from 'react-icons/md/share'
+import DownloadIcon from 'react-icons/lib/md/file-download'
+import CloseIcon from 'react-icons/lib/md/close'
+import FullScreenIcon from 'react-icons/lib/md/fullscreen'
+import FullScreenExitIcon from 'react-icons/lib/md/fullscreen-exit'
+import ShareIcon from 'react-icons/lib/md/share'
 
 const hasFullscreen = fullscreen.supports()
 

@@ -3,7 +3,7 @@ import './carousel.sass'
 import React from 'react'
 const classnames = require('classnames')
 
-import CloseIcon from 'react-icons/md/close'
+import CloseIcon from 'react-icons/lib/md/close'
 
 import css from '../css'
 const find = require('array.prototype.find')
