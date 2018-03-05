@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom'
 
 import options from './src/options'
-import App from 'yaux/app'
+import App from 'yaux/lib/app'
 import store from './src/store'
 import Lightbox from './src/components'
 import Keyboard from './src/keyboard'
