@@ -20,7 +20,8 @@
   ],
   "scripts": {},
   "devDependencies": {
-    "eslint": "^3.12.2"
+    "eslint": "^3.12.2",
+    "rollup": "^0.56.4"
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
