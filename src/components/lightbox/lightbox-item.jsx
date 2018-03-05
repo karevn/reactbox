@@ -2,7 +2,7 @@ import './lightbox-item.sass'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import classnames from 'classnames'
+const classnames = require('classnames')
 
 import Loading from '../loading'
 import Description from './description'

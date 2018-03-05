@@ -1,7 +1,7 @@
 import './share.sass'
 
 import React from 'react'
-import classnames from 'classnames'
+const classnames = require('classnames')
 import {getShareUrl} from '../share'
 
 export default function ShareMenu(props) {

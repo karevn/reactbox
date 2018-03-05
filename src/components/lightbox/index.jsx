@@ -1,6 +1,6 @@
 import './index.sass'
 
-import classnames from 'classnames'
+const classnames = require('classnames')
 
 import React from 'react'
 

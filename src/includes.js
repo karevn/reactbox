@@ -1,3 +1,3 @@
-module.exports = function includes(list, item) {
+export default function includes(list, item) {
   return list.indexOf(item) !== -1
 }

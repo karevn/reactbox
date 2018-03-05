@@ -2,7 +2,7 @@ import './index.sass'
 import '../../sass/black/index.sass'
 import '../../sass/white/index.sass'
 import React from 'react'
-import classnames from 'classnames'
+const classnames = require('classnames')
 
 import Toolbar from './toolbar'
 import Lightbox from './lightbox'

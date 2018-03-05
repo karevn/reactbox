@@ -1,7 +1,7 @@
 import './iframe.sass'
 
 import React from 'react'
-import classnames from 'classnames'
+const classnames = require('classnames')
 
 import {pixels} from '../../../css'
 

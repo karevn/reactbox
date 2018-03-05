@@ -5,7 +5,7 @@ import React from 'react'
 import Iframe from './iframe'
 import getStyle from '../style'
 import {valign} from './resize'
-import find from 'array.prototype.find'
+const find = require('array.prototype.find')
 
 function load(tag, id, srcAttr, srcVal, attr) {
   return new Promise((resolve, reject) => {

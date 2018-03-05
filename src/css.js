@@ -1,4 +1,4 @@
-import camelcase from 'uppercamelcase'
+const camelcase = require('uppercamelcase')
 import includes from './includes'
 
 const defaultPrefixes = ['Moz', 'Webkit', 'O', 'MS']

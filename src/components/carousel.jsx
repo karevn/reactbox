@@ -1,39 +1,41 @@
 import './carousel.sass'
 
 import React from 'react'
-import classnames from 'classnames'
+const classnames = require('classnames')
 
 import CloseIcon from 'react-icons/md/close'
 
 import css from '../css'
-import find from 'array.prototype.find'
-import {get as property} from 'dot-prop'
-import curry from 'curry'
+const find = require('array.prototype.find')
+const property = require('dot-prop').get
+
 
 function differs(a, b, props) {
   return find(props, (prop) => property(a, prop) !== property(b, prop))
 }
 
-const onClick = curry(function onClick(props, e) {
+const onClick = props => e => {
   e.preventDefault()
   props.dispatch('item.thumbnail.click', props.item)
-})
-const onError = curry(function onError(props, e) {
-  props.dispatch('item.thumbnail.error', props.item)
-})
-const onLoad = curry(function onLoad(props, e) {
+}
+
+const onError = props => e => props.dispatch('item.thumbnail.error', props.item)
+
+const onLoad = props => e => {
   props.item.thumbnailSize = {width: e.target.naturalWidth,
       height: e.target.naturalHeight}
   props.dispatch('item.thumbnail.load', props.item)
-})
-const onImageMounted = curry(function onImageMounted(props, image) {
+}
+
+const onImageMounted = props => image => {
   if (!image) {
     return
   }
   if (image.complete || props.item.thumbnailLoaded) {
     props.dispatch('item.thumbnail.load', props.item)
   }
-})
+}
+
 function thumbnailTransform(props) {
   return {transform: translate(props.left, props.top)} }
 function translate(x, y) {

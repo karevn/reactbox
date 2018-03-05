@@ -1,4 +1,4 @@
-import find from 'array.prototype.find'
+const find = require('array.prototype.find')
 
 let prefix = prop => ['moz', 'ms', 'webkit'].map(prefix => `${prefix}${prop}`)
 export default {

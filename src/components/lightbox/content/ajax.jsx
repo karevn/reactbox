@@ -1,7 +1,7 @@
 import './ajax.sass'
 
 import React from 'react'
-import ajax from 'atomicjs'
+const ajax = require('atomicjs')
 
 export default class Ajax extends React.Component {
   constructor (props) {
@@ -33,4 +33,3 @@ export default class Ajax extends React.Component {
     )
   }
 }
-

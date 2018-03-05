@@ -6,16 +6,15 @@ import getStyle from '../style'
 import {fit, fill, valign, align} from './resize'
 import {pixels} from '../../../css'
 import includes from '../../../includes'
-import curry from 'curry'
-import asap from 'asap'
+const asap = require('asap')
 
-const onItemLoad = curry(function onItemLoad(props, event) {
+const onItemLoad = props => event => {
   props.item.size = {
     width: event.target.naturalWidth,
     height: event.target.naturalHeight
   }
   props.dispatch('item.load', props.item)
-})
+}
 
 function getImageStyle (state, item) {
   if (!item.size || !state) {
