@@ -1,12 +1,12 @@
-import FacebookIcon from 'react-icons/fa/facebook'
-import TwitterIcon from 'react-icons/fa/twitter'
-import GooglePlusIcon from 'react-icons/fa/google-plus'
-import RedditIcon from 'react-icons/fa/reddit'
-import DiggIcon from 'react-icons/fa/digg'
-import StumbleUponIcon from 'react-icons/fa/stumbleupon'
-import DeliciousIcon from 'react-icons/fa/delicious'
-import PinterestIcon from 'react-icons/fa/pinterest'
-import VkIcon from 'react-icons/fa/vk'
+import FacebookIcon from 'react-icons/lib/fa/facebook'
+import TwitterIcon from 'react-icons/lib/fa/twitter'
+import GooglePlusIcon from 'react-icons/lib/fa/google-plus'
+import RedditIcon from 'react-icons/lib/fa/reddit'
+import DiggIcon from 'react-icons/lib/fa/digg'
+import StumbleUponIcon from 'react-icons/lib/fa/stumbleupon'
+import DeliciousIcon from 'react-icons/lib/fa/delicious'
+import PinterestIcon from 'react-icons/lib/fa/pinterest'
+import VkIcon from 'react-icons/lib/fa/vk'
 
 const services = {
   facebook: {
