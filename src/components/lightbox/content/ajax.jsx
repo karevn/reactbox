@@ -20,8 +20,8 @@ export default class Ajax extends React.Component {
     this.props.dispatch('item.error', this.props.item)
   }
 
-  onAjaxLoaded (response) {
-    this.setState({html: response.data})
+  onAjaxLoaded (html) {
+    this.setState({html})
     this.props.dispatch('item.load', this.props.item)
   }
 
