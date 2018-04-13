@@ -35,11 +35,11 @@ function fitHeight(container, content) {
 }
 
 export function valign(container, size) {
-  return Object.assign({}, size, {top: (container.height - size.height) / 2})
+  return {...size, top: (container.height - size.height) / 2}
 }
 
 export function halign(container, size) {
-  return Object.assign({}, size, {left: (container.width - size.width) / 2})
+  return {...size, left: (container.width - size.width) / 2}
 }
 
 export function align(container, size) {
