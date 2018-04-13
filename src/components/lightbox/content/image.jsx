@@ -17,7 +17,7 @@ const onItemLoad = props => event => {
 }
 
 function getImageStyle (state, item) {
-  if (!item.size || !state) {
+  if (!item.size || !state || includes(['right', 'bottom'], getStyle(item))) {
     return
   }
   if (includes(['none', 'mini'], getStyle(item))) {
@@ -41,7 +41,10 @@ export default class Image extends React.Component {
   }
   updateSize () {
     const node = this.refs.this
-    this.setState({width: node.clientWidth, height: node.clientHeight})
+    this.setState({
+      width: node.clientWidth,
+      height: node.clientHeight
+    })
   }
   componentWillUnmount () {
     window.removeEventListener('resize', this.updateSize)
