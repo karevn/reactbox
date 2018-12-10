@@ -1,35 +1,43 @@
 /* global location */
-let hash = null
-function clearHash() {
-  if ( window.history && window.history.pushState ) {
-      window.history.pushState('', '', window.location.pathname)
-  } else {
-      window.location.href = window.location.href.replace(/#.*$/, '#');
-  }
-}
+let hash = null;
+const hasHistoryAPI = () => window.history && window.history.pushState;
+
+const addToHistoryAPI = () =>
+  window.history.pushState("", "", window.location.pathname);
+const addUsingLocation = () => {
+  window.location.href = window.location.href.replace(/#.*$/, "#");
+};
+const clearHash = () =>
+  hasHistoryAPI() ? addToHistoryAPI() : addUsingLocation();
+
+const storeHash = () => {
+  hash = location.hash;
+};
+const setHash = value => {
+  location.hash = value;
+};
+const justTry = callback => {
+  try {
+    callback();
+  } catch (error) {}
+};
 export default {
   init() {
     if (location.hash) {
-      hash = location.hash
+      storeHash();
     }
   },
   set(item) {
-    try {
-      if (item.hash) {
-        location.hash = item.hash
-      } else {
-        location.hash = hash || ''
-      }
-    } catch (error) {}
+    justTry(() => setHash(item.hash ? item.hash : hash || ""));
   },
   reset() {
-    try {
+    justTry(() => {
       if (hash) {
-        location.hash = hash
+        setHash(hash);
       } else {
-        clearHash()
+        clearHash();
       }
-    } catch (error) {}
-    hash = null
+    });
+    storeHash(null);
   }
-}
+};

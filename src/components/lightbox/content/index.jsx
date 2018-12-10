@@ -1,11 +1,10 @@
-import React from 'react'
-import Iframe from './iframe'
+import React from "react";
+import Iframe from "./iframe";
 
-export image from './image'
-export video from './video'
-export ajax from './ajax'
-export html from './html'
-export function iframe (props) {
-  return (<Iframe {...props} src={props.item.url} />)
+export { default as image } from "./image";
+export { default as video } from "./video";
+export { default as ajax } from "./ajax";
+export { default as html } from "./html";
+export function iframe(props) {
+  return <Iframe {...props} src={props.item.url} />;
 }
-

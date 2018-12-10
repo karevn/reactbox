@@ -1,3 +1,3 @@
 export default function includes(list, item) {
-  return list.indexOf(item) !== -1
+  return list.indexOf(item) !== -1;
 }

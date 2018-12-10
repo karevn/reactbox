@@ -1,10 +1,10 @@
 export default {
   toolbar: {
-    download: 'Download',
-    share: 'Share',
+    download: "Download",
+    share: "Share",
     fullscreen: {
-      enter: 'Enter fullscreen',
-      exit: 'Exit fullscreen'
+      enter: "Enter fullscreen",
+      exit: "Exit fullscreen"
     }
   }
-}
+};

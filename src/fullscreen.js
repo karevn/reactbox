@@ -1,34 +1,47 @@
-const find = require('array.prototype.find')
+const find = require("array.prototype.find");
 
-let prefix = prop => ['moz', 'ms', 'webkit'].map(prefix => `${prefix}${prop}`)
+let prefix = prop => ["moz", "ms", "webkit"].map(prefix => `${prefix}${prop}`);
 export default {
   supports() {
-    let el = document.documentElement
-    if (el.requestFullscreen) { return true }
-    return !!find(prefix('RequestFullScreen'), prefixed => !!el[prefixed])
+    let el = document.documentElement;
+    if (el.requestFullscreen) {
+      return true;
+    }
+    return !!find(prefix("RequestFullScreen"), prefixed => !!el[prefixed]);
   },
   is() {
-    for (let method of ['fullscreenEnabled', 'webkitFullscreenEnabled',
-      'mozFullscreenEnabled', 'msFullscreenEnabled']) {
+    for (let method of [
+      "fullscreenEnabled",
+      "webkitFullscreenEnabled",
+      "mozFullscreenEnabled",
+      "msFullscreenEnabled"
+    ]) {
       if (document[method]) {
-        return document[method]
+        return document[method];
       }
     }
-    return null
+    return null;
   },
   enter(el) {
-    if (!el) { el = document.documentElement }
-    let method = el.requestFullScreen || el.webkitRequestFullScreen ||
-      el.mozRequestFullScreen || el.msRequestFullScreen
-    return method.apply(el)
+    if (!el) {
+      el = document.documentElement;
+    }
+    let method =
+      el.requestFullScreen ||
+      el.webkitRequestFullScreen ||
+      el.mozRequestFullScreen ||
+      el.msRequestFullScreen;
+    return method.apply(el);
   },
   exit() {
-    let el = document.documentElement
-    let method = el.exitFullscreen || el.mozCancelFullScreen ||
-      el.msExitFullscreen
-    if (method) { method.apply(el) }
+    let el = document.documentElement;
+    let method =
+      el.exitFullscreen || el.mozCancelFullScreen || el.msExitFullscreen;
+    if (method) {
+      method.apply(el);
+    }
     if (document.webkitExitFullscreen) {
-      return document.webkitExitFullscreen()
+      return document.webkitExitFullscreen();
     }
   }
-}
+};
